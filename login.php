@@ -107,7 +107,7 @@ else{
 </header>
 
 <div class="container logincontainer">
-    <h3 class="text-center">Welcome to Bazar! Please login</h3>
+    <h3 class="text-center">Welcome to Quick Shop! Please login</h3>
 
     <?php if(isset($loginError)) echo $loginError; ?>
     <?php echo $_SESSION['errmsg'];?>
@@ -128,7 +128,7 @@ else{
   </div>
   <button type="submit" name="submit" id="submit" class="btn btn-warning">Login</button>
 </form>
-<p class="botton-line text-center">New in bazar!!   <a href="signup.php" >Register</a>  now</p>
+<p class="botton-line text-center">New in Quick Shop!!   <a href="signup.php" >Register</a>  now</p>
 </div>
 
 <footer>

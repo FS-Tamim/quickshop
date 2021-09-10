@@ -99,7 +99,7 @@ include('includes/config.php');
 		
 <div 
 
-<?php echo include('includes/brands-slider.php');?>
+
 
 </div>
 </div>

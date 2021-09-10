@@ -247,7 +247,7 @@ $email=$_POST['email'];
 </header>
 
 <div class="container signupcontainer">
-    <h3 class="text-center">Create your Bazar Account!!!!</h3>
+    <h3 class="text-center">Create your Quick Shop Account!!!!</h3>
     
 			<?php
         
@@ -292,7 +292,7 @@ $email=$_POST['email'];
   <?php if(isset($cpasswordError)) echo $cpasswordError; ?>
   <div  class="termandcondition">
    <input type="checkbox" name="term" value="true" >
-   <span><b>I am agree to term and condition of HatBazar.com</b></span>
+   <span><b>I am agree to term and condition of HatQuick Shop.com</b></span>
   </div>
   <br>
  

@@ -130,9 +130,13 @@ a{
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     
   <ul class="navbar-nav ml-auto">
-  <li class="nav-item"> 
-		  <a class="nav-link" href="#"><i class="fas fa-store"></i> Sell 
-		  </a> 
+  <li class="nav-item dropdown"> 
+  <a class="nav-link dropdown-toggle fas fa-store" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		 sell
+		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		  <a class="dropdown-item" href="seller/login.php">login</a>
+		  <a class="dropdown-item" href="seller/signup.php">sign up</a>
+          </div>
 	  </li>
 	  <li class="nav-item"> 
 		  <a class="nav-link" href="track-orders.php"><i class="fas fa-truck"></i> Track Order 

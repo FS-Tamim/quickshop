@@ -162,7 +162,7 @@ Address</h2>
             </div>
 <div class="email">
               <span class="fas fa-envelope"></span>
-              <span class="text">abc@example.com</span>
+              <span class="text">quick.shop@gmail.com</span>
             </div>
 </div>
 </div>
