@@ -34,16 +34,27 @@ header('location:my-wishlist.php');
 
 }
 }
-if(isset($_POST['submit']))
-{
-	$qty=$_POST['quality'];
-	$price=$_POST['price'];
-	$value=$_POST['value'];
-	$name=$_POST['name'];
-	$summary=$_POST['summary'];
-	$review=$_POST['review'];
-	mysqli_query($con,"insert into productreviews(productId,quality,price,value,name,summary,review) values('$pid','$qty','$price','$value','$name','$summary','$review')");
+if(isset($_POST["rating_data"]))
+{  
+    echo $pid;
+    $userid=$_SESSION['id'];
+    $user_name=$_POST['user_name'];
+	$user_rating=$_POST['rating_data'];
+	$user_review=$_POST['user_review'];
+   
+    $query=mysqli_query($con,"select orders.productId as opid,orders.orderDate as odate,orders.id as orderid from orders join users on orders.userId=users.id where orders.userId='$userid'");
+    $opid=0;
+    
+    while($row=mysqli_fetch_array($query)) {
+    
+         $opid=$row['opid'];
+
 }
+if($pid==$opid){
+    $review=mysqli_query($con,"insert into review_table (productId,userId, user_rating, user_review) values('$pid',' $userid','$user_rating','$user_review')"); 
+      
+   }    
+} 
 
 
 ?>
@@ -788,24 +799,284 @@ if(isset($_POST['submit']))
             </div>
             <?php } ?>
         </div>
+    </div> 
+    <div class="container">
+            <h1 class="mt-5 mb-5">Review & Rating System in PHP & Mysql using Ajax</h1>
+            <div class="card">
+                <div class="card-header">Sample Product</div>
+                <?php
+   
+    // $query=mysqli_query($con,"SELECT * FROM review_table ORDER BY review_id DESC WHERE id={$pid}");
+
+$query = mysqli_query($con,"SELECT AVG(user_rating) as AVGRATE from review_table WHERE productId={$pid}");
+$row = mysqli_fetch_array($query);
+$AVGRATE=$row['AVGRATE'];
+
+$query = mysqli_query($con,"SELECT count(review_id) as Totalreview from  review_table where productId={$pid}");
+$row = mysqli_fetch_array($query);
+$Total_review=$row['Totalreview'];
+
+$query = mysqli_query($con,"SELECT count(review_id) as fiveStar from  review_table where productId={$pid} and user_rating=5");
+$row = mysqli_fetch_array($query);
+$fiveStar=$row['fiveStar'];
+
+$query = mysqli_query($con,"SELECT count(review_id) as fourStar from  review_table where productId={$pid} and user_rating=4");
+$row = mysqli_fetch_array($query);
+$fourStar=$row['fourStar'];
+
+$query = mysqli_query($con,"SELECT count(review_id) as threeStar from  review_table where productId={$pid} and user_rating=3");
+$row = mysqli_fetch_array($query);
+$threeStar=$row['threeStar'];
+
+$query = mysqli_query($con,"SELECT count(review_id) as twoStar from  review_table where productId={$pid} and user_rating=2");
+$row = mysqli_fetch_array($query);
+$twoStar=$row['twoStar'];
+
+$query = mysqli_query($con,"SELECT count(review_id) as oneStar from  review_table where productId={$pid} and user_rating=1");
+$row = mysqli_fetch_array($query);
+$oneStar=$row['oneStar'];
+// $query = mysqli_query($conn,"SELECT count(remark) as Totalreview from  rating_data where status=1");
+// $row = mysqli_fetch_array($query);
+// $Total_review=$row['Totalreview'];
+// $review = mysqli_query($con,"SELECT user_rating,user_review,review_posting_time from review_table where productId={$pid} order by review_posting_time desc limit 10");
+$review = mysqli_query($con,"select users.name as username,review_table.user_rating as user_rating ,review_table.user_review as user_review,review_table.review_posting_time as review_posting_time from users join review_table on users.id=review_table.userId where review_table.productId={$pid} order by review_posting_time desc limit 10");
+// $rating = mysqli_query($conn,"SELECT count(*) as Total,rating from rating_data group by rating order by rating desc");
+echo $AVGRATE;
+    
+   
+                ?><div class="card-body">
+                    <div id="validaterr"></div>
+                    <div class="row">
+                        <div class="col-sm-4 text-center">
+                            <h1 class="text-warning mt-4 mb-4">
+                                <b><span id="average_rating"><?php echo round($AVGRATE,1);?></span>/5</b>
+                            </h1>
+                            <div class="mb-3">
+                                <i class="fas fa-star star-light mr-1 main_star"></i>
+                                <i class="fas fa-star star-light mr-1 main_star"></i>
+                                <i class="fas fa-star star-light mr-1 main_star"></i>
+                                <i class="fas fa-star star-light mr-1 main_star"></i>
+                                <i class="fas fa-star star-light mr-1 main_star"></i>
+                            </div>
+                            <h3><span id="total_review"><?=$Total_review;?></span> Review</h3>
+                        </div>
+                        <div class="col-sm-4">
+                            <p>
+                            <div class="progress-label-left"><b>5</b> <i class="fas fa-star text-warning"></i></div>
+
+                            <div class="progress-label-right">(<span id="total_five_star_review"><?=$fiveStar;?></span>)
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+                            </div>
+                            </p>
+                            <p>
+                            <div class="progress-label-left"><b>4</b> <i class="fas fa-star text-warning"></i></div>
+
+                            <div class="progress-label-right">(<span id="total_four_star_review"><?=$fourStar;?></span>)
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
+                            </div>
+                            </p>
+                            <p>
+                            <div class="progress-label-left"><b>3</b> <i class="fas fa-star text-warning"></i></div>
+
+                            <div class="progress-label-right">(<span
+                                    id="total_three_star_review"><?=$threeStar;?></span>)
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100" id="three_star_progress"></div>
+                            </div>
+                            </p>
+                            <p>
+                            <div class="progress-label-left"><b>2</b> <i class="fas fa-star text-warning"></i></div>
+
+                            <div class="progress-label-right">(<span id="total_two_star_review"><?=$twoStar;?></span>)
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100" id="two_star_progress"></div>
+                            </div>
+                            </p>
+                            <p>
+                            <div class="progress-label-left"><b>1</b> <i class="fas fa-star text-warning"></i></div>
+
+                            <div class="progress-label-right">(<span id="total_one_star_review"><?=$oneStar;?></span>)
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100" id="one_star_progress"></div>
+                            </div>
+                            </p>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <h3 class="mt-4 mb-3">Write Review Here</h3>
+                            <button type="button" name="add_review" id="add_review"
+                                class="btn btn-primary">Review</button>
+                        </div>
+                    </div>
+
+                </div>
+                <?php
+             while($db_review= mysqli_fetch_array($review))
+                             {
+                             ?>
+            </div>
+
+            <div class="mt-5" id="review_content">
+
+                <div class="row mb-3">
+                    <div class="col-sm-1">
+
+                        <div class="rounded-circle bg-danger text-white pt-2 pb-2">
+                            <h3 class="text-center"><?=$db_review['username'][0];?></h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-11">
+                        <div class="card">
+                            <div class="card-header"><b><?=$db_review['username'];?></b></div>
+                            <div class="card-body">
+                                <?php
+                            for ($x = 1; $x <= $db_review['user_rating']; $x++) {
+                                
+                             
+                            ?>
+                                <i class="fas fa-star text-warning mr-1"></i>
+                                <?php
+                                      }    ?>
+
+                                <br /><?=$db_review['user_review'];?>
+                            </div>
+                            <div class="card-footer text-right"><?=$db_review['review_posting_time'];?></div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <?php } ?>
+            </div>
+        </div>
+
+        <div id="review_modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Submit Review</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <h4 class="text-center mt-2 mb-4">
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
+                        </h4>
+                        <div class="form-group">
+                            <input type="text" name="user_name" id="user_name" class="form-control"
+                                value="<?php echo htmlentities($_SESSION['username']);?>"
+                                placeholder=" Enter Your Name" />
+                        </div>
+                        <div class="form-group">
+                            <textarea name="user_review" id="user_review" class="form-control"
+                                placeholder="Type Review Here"></textarea>
+                        </div>
+                        <div class="form-group text-center mt-4">
+                            <button type="button" class="btn btn-primary" id="save_review" onClick="window.location.reload();"
+                                >Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="assets/js/scripts.js"></script>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+    </script>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+
     <script>
-    var element = document.getElementsByClassName('available');
+    var element = document.getElementsByClassName(' value');
     console.log(element[0].innerHTML);
-    if (element[0].innerHTML == "Out of Stock") {
-
-        
-        document.getElementById("addtocart").removeAttribute('href');
+    if (element[0].innerHTML == " Out of Stock") {
         document.getElementById("addtocart").style.backgroundColor = "#B2BEB5";
-        document.getElementById("addtocart").style.color = "#ffffff";
+        document.getElementById("addtocart").removeAttribute('href');
         document.getElementById("availability").style.color = "#cc0000";
-
     } else {
-        document.getElementById("addtocart").style.backgroundColor = "#FFD300";
-        document.getElementById("addtocart").style.color = "#181818";
+        document.getElementById("addtocart").style.backgroundColor = "#db3d52";
         document.getElementById("availability").style.color = "#18A558";
     }
+    var rating_data = 0;
+    $('#add_review').click(function() {
+        $('#review_modal').modal('show');
+    });
+    $(document).on('mouseenter', '.submit_star', function() {
+        var
+            rating = $(this).data('rating');
+        reset_background();
+        for (var count = 1; count <= rating; count++) {
+            $('#submit_star_' + count).addClass('text-warning');
+        }
+    });
+
+    function reset_background() {
+        for (var count = 1; count <= 5; count++) {
+            $('#submit_star_' +
+                count).addClass('star-light');
+            $('#submit_star_' + count).removeClass('text-warning');
+        }
+    }
+    $(document).on('mouseleave', '.submit_star', function() {
+        reset_background();
+        for (var count = 1; count <= rating_data; count++) {
+            $('#submit_star_' +
+                count).removeClass('star-light');
+            $('#submit_star_' + count).addClass('text-warning');
+        }
+    });
+    $(document).on('click', '.submit_star', function() {
+        rating_data = $(this).data('rating');
+    });
+    $('#save_review').click(function() {
+        var
+            user_name = $('#user_name').val();
+        var user_review = $('#user_review').val();
+        if (user_name == '' || user_review == '') {
+            alert("Please Fill Both Field");
+            return false;
+        } else {
+            $.ajax({
+                type: "POST",
+                data: {
+                    rating_data: rating_data,
+                    user_name: user_name,
+                    user_review: user_review
+                },
+                success: function(data) {
+
+                    $('#review_modal').modal('hide');
+
+                }
+            })
+        }
+    });
     </script>
 </body>
 <footer>
