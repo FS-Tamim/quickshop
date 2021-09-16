@@ -56,7 +56,7 @@ else{
 
 
 mysqli_query($con,"insert into orders(userId,productId,quantity) values('".$_SESSION['id']."','$qty','$val34')");
-header('location:payment-method.php');
+header('location:example_easycheckout.php');
 }
 }
 }
