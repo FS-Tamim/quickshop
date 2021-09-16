@@ -91,12 +91,11 @@ if(isset($_GET['del']))
                                     </thead>
                                     <tbody>
 
-                                        <?php $query=mysqli_query($con,"select products.*,category.categoryName,subcategory.subcategory from products join category on category.id=products.category join subcategory on subcategory.id=products.subCategory");
+                                    <?php $query=mysqli_query($con,"select products.*,category.categoryName,subcategory.subcategory from products join category on category.id=products.category join subcategory on subcategory.id=products.subCategory");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
-{
-?>
-                                        <tr>
+{ if($row['merchant']!=="Quick Shop"){
+?>                                     <tr>
                                             <td><?php echo htmlentities($cnt);?></td>
                                             <td><?php echo htmlentities($row['productName']);?></td>
                                             <td><?php echo htmlentities($row['categoryName']);?></td>
@@ -111,7 +110,7 @@ while($row=mysqli_fetch_array($query))
                                                         class="icon-remove-sign"></i></a>
                                             </td>
                                         </tr>
-                                        <?php $cnt=$cnt+1; } ?>
+                                        <?php $cnt=$cnt+1; } }?>
 
                                 </table>
                             </div>

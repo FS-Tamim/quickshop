@@ -2,15 +2,34 @@
 session_start();
 include('../includes/config.php');
 
-if(isset($_POST['submit']))
-{
-$sql=mysqli_query($con,"SELECT password FROM  admin where password='".md5($_POST['password'])."' && email='".$_SESSION['login']."'");
-$num=mysqli_fetch_array($sql);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
 $currentTime = date( 'd-m-Y h:i:s A', time () );
+if(isset($_POST['namesubmit']))
+{
+    $sql=mysqli_query($con,"SELECT password FROM  admin where  email='".$_SESSION['alogin']."'");
+    $num=mysqli_fetch_array($sql);
+    if($num>0)
+{
+    $adminname=$_POST['adminname'];
+$_SESSION['adminname']=$adminname;
+ $con=mysqli_query($con,"update admin set name='$adminname', updationDate='$currentTime' where email='".$_SESSION['alogin']."'");
+$_SESSION['msg']="Name Changed Successfully !!";
+}
+else
+{
+$_SESSION['msg']="Error !!";
+}
+}
+
+if(isset($_POST['submit']))
+{
+$sql=mysqli_query($con,"SELECT password FROM  admin where password='".md5($_POST['password'])."' && email='".$_SESSION['alogin']."'");
+$num=mysqli_fetch_array($sql);
+
+
 if($num>0)
 {
- $con=mysqli_query($con,"update admin set password='".md5($_POST['newpassword'])."', updationDate='$currentTime' where email='".$_SESSION['login']."'");
+ $con=mysqli_query($con,"update admin set password='".md5($_POST['newpassword'])."', updationDate='$currentTime' where email='".$_SESSION['alogin']."'");
 $_SESSION['msg']="Password Changed Successfully !!";
 }
 else
@@ -142,9 +161,29 @@ $_SESSION['msg']="Old Password not match !!";
                                 </div>
                                 <?php } ?>
                                 <br />
-
                                 <form class="form-horizontal row-fluid" name="chngpwd" method="post"
                                     onSubmit="return valid();">
+                                    <div class="control-group">
+                                        <label class="control-label" for="basicinput">Admin Name</label>
+                                        <div class="controls">
+                                            <input type="text" class="span8 tip" value="<?php if(isset($adminname)) {echo $adminname;}
+                                                            else{echo $_SESSION['adminname'];}
+                                                            ?>" id="adminname" name="adminname">
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="submit" name="namesubmit" class="lnk">Change</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <br>
+                                <form class="form-horizontal row-fluid" name="chngpwd" method="post"
+                                    onSubmit="return valid();">
+
 
                                     <div class="control-group">
                                         <label class="control-label" for="basicinput">Current Password</label>

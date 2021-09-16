@@ -14,6 +14,7 @@ if(isset($_POST['submit']))
 	$productdescription=$_POST['productDescription'];
 	$productscharge=$_POST['productShippingcharge'];
 	$productavailability=$_POST['productAvailability'];
+    $insertshopname=$_POST['shopName'];
 	$productimage1=$_FILES["productimage1"]["name"];
 	
 //for getting product id
@@ -27,7 +28,7 @@ if(!is_dir($dir)){
 
 	move_uploaded_file($_FILES["productimage1"]["tmp_name"],"productimages/$productid/".$_FILES["productimage1"]["name"]);
 	
-$sql=mysqli_query($con,"insert into products(category,subCategory,productName,productCompany,productPrice,productDescription,shippingCharge,productAvailability,productImage1,productPriceBeforeDiscount) values('$category','$subcat','$productname','$productcompany','$productprice','$productdescription','$productscharge','$productavailability','$productimage1','$productpricebd')");
+$sql=mysqli_query($con,"insert into products(category,subCategory,productName,productCompany,productPrice,productDescription,shippingCharge,productAvailability,merchant,productImage1,productPriceBeforeDiscount) values('$category','$subcat','$productname','$productcompany','$productprice','$productdescription','$productscharge','$productavailability','$insertshopname','$productimage1','$productpricebd')");
 $_SESSION['msg']="Product Inserted Successfully !!";
 
 }
@@ -127,7 +128,8 @@ $_SESSION['msg']="Product Inserted Successfully !!";
 <body>
     <?php include('include/header.php');?>
 
-    <div class="wrapper">
+   <div class="container ">
+   <div class="wrapper">
         <div class="container">
             <div class="row">
                 <?php include('include/sidebar.php');?>
@@ -163,6 +165,11 @@ $_SESSION['msg']="Product Inserted Successfully !!";
 
                                 <form class="form-horizontal row-fluid" name="insertproduct" method="post"
                                     enctype="multipart/form-data">
+                                    <div class="control-group"><label class="control-label" for="basicinput">Shop
+                                            Name</label>
+                                        <div class="controls"><input type="text" name="shopName" value="Quick Shop"
+                                                class="span8 tip" required></div>
+                                    </div>
 
                                     <div class="control-group">
                                         <label class="control-label" for="basicinput">Category</label>
@@ -285,6 +292,7 @@ while($row=mysqli_fetch_array($query))
         </div>
     </div>
 
+   </div>
     <?php include('include/footer.php');?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 

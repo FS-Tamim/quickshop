@@ -99,6 +99,12 @@ $num1 = mysqli_num_rows($rt);
                     Manage users
                 </a>
             </li>
+            <li>
+                <a href="seller-info.php" class="title">
+                    <i class="menu-icon icon-group" ></i>
+                    Manage sellers
+                </a>
+            </li>
         </ul>
         <ul class="widget widget-menu unstyled">
             <li><a class="title" class="title"href="category.php"><i class="menu-icon icon-tasks"></i> Create Category </a></li>
@@ -110,6 +116,8 @@ $num1 = mysqli_num_rows($rt);
         <ul class="widget widget-menu unstyled">
         <li><a class="title" class="title"href="change_password.php"><i class="menu-icon icon-tasks"></i>Change Password </a></li>
             <li><a class="title" class="title"href="user-logs.php"><i class="menu-icon icon-tasks"></i>User Login Log </a></li>
+            <li>
+            <li><a class="title" class="title"href="seller-logs.php"><i class="menu-icon icon-tasks"></i>Seller Login Log </a></li>
             <li>
                 <a class="title" href="../logout.php" class="title"href="logout.php">
                     <i class="menu-icon icon-signout"></i>

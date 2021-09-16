@@ -7,6 +7,10 @@
 	padding: 15px;
 	text-decoration: none!important
 }
+.widget-menu>li {
+    list-style-type: none;
+}
+
 .widget-menu .menu-icon {
 	 
 	margin-right: 10px;
@@ -93,23 +97,16 @@ $num1 = mysqli_num_rows($rt);
                 </ul>
             </li>
 
-            <li>
-                <a href="manage-users.php" class="title">
-                    <i class="menu-icon icon-group" ></i>
-                    Manage users
-                </a>
-            </li>
         </ul>
         <ul class="widget widget-menu unstyled">
-            <li><a class="title" class="title"href="category.php"><i class="menu-icon icon-tasks"></i> Create Category </a></li>
-            <li><a class="title" class="title"href="subcategory.php"><i class="menu-icon icon-tasks"></i>Sub Category </a></li>
+            
             <li><a class="title" class="title"href="insert-product.php"><i class="menu-icon icon-paste"></i>Insert Product </a></li>
             <li><a class="title" class="title"href="manage-products.php"><i class="menu-icon icon-table"></i>Manage Products </a></li>
 
         </ul>
         <ul class="widget widget-menu unstyled">
-        <li><a class="title" class="title"href="change_password.php"><i class="menu-icon icon-tasks"></i>Change Password </a></li>
-            <li><a class="title" class="title"href="user-logs.php"><i class="menu-icon icon-tasks"></i>User Login Log </a></li>
+        <li><a class="title" class="title"href="seller-account.php"><i class="menu-icon icon-tasks"></i> My account </a></li>
+         
             <li>
                 <a class="title" href="../logout.php" class="title"href="logout.php">
                     <i class="menu-icon icon-signout"></i>

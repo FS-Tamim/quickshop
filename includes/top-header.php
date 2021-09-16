@@ -131,13 +131,22 @@ a{
     
   <ul class="navbar-nav ml-auto">
   <li class="nav-item dropdown"> 
-  <a class="nav-link dropdown-toggle fas fa-store" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		 sell
-		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		  <a class="dropdown-item" href="seller/login.php">login</a>
-		  <a class="dropdown-item" href="seller/signup.php">sign up</a>
-          </div>
-	  </li>
+  <?php 
+if(strlen($_SESSION['slogin'])==0)
+{  $link="seller/login.php";
+   }
+else{
+	$link="seller/insert-product.php";
+}?>
+
+<li class="nav-item">
+	<a class="nav-link" href="<?php echo htmlentities($link);?>"><i class=" fas fa-store"></i>
+		Sell</i></a>
+</li>
+
+                    
+
+
 	  <li class="nav-item"> 
 		  <a class="nav-link" href="track-orders.php"><i class="fas fa-truck"></i> Track Order 
 		  </a> 
@@ -150,30 +159,16 @@ a{
 		  <a class="nav-link" href="my-wishlist.php"><i class="fas fa-heart"></i> Wishlist</a> 
 	  </li> 
 	  
-<?php if(strlen($_SESSION['login']))
-    { $id_a=1;
-        $sql_a="SELECT email FROM admin WHERE id={$id_a}";
-        
-        $query_a = mysqli_query($con,$sql_a);
-        $row = mysqli_fetch_assoc($query_a);
-          $email = $row['email'];
-          if($_SESSION['login']==$email){
-          //  echo $_SESSION['login'];
-         //echo $email;
-          ?><li><a class="nav-link" href="admin/change_password.php">Admin Portal</a></li>
-                    <?php   }  ?>
-	  <li class="nav-item dropdown"> 
-	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	  <i class="fas fa-user"></i><?php echo htmlentities($_SESSION['username']); ?>
-		</a>
-		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		  <a class="dropdown-item" href="my-account.php">My Account</a>
-		  <a class="dropdown-item" href="logout.php">log out</a>
-         
-        </div>
-		<?php }else{ ?>
-		
-		<li class="nav-item dropdown"> 
+
+	  <?php 
+                    if(strlen($_SESSION['login'])==0)
+                            {   if(strlen($_SESSION['alogin'])!==0) {    ?>
+                    <li><a class="nav-link" href="admin/change_password.php">Admin Portal</a></li>
+                    <li><a class="nav-link" href="admin/change_password.php"><i class="icon fa fa-user"></i>
+                            <?php echo htmlentities( $_SESSION['adminname']);?></a></li>
+                    <li><a class="nav-link" href="logout.php"><i class="icon fa fa-sign-out"></i>Logout</a></li>
+                    <?php   } else{?>
+						<li class="nav-item dropdown"> 
 	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	  <i class="fas fa-user"></i> account
 		</a>
@@ -181,14 +176,22 @@ a{
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="login.php">Login</a>
 		  <a class="dropdown-item" href="signup.php">Sign Up</a>
-		  <?php }
- ?>
+		  
+
+ 
 		  
          
         </div>
 	  </li> 
+                    <?php }}
+else{ ?>
+                    <li><a class="nav-link" href="my-account.php"><i class="icon fa fa-user"></i>
+                            <?php echo htmlentities($_SESSION['username']);?></a></li>
+                    <li><a class="nav-link" href="logout.php"><i class="icon fa fa-sign-out"></i>Logout</a></li>
+                    <?php } ?>
 
   </ul> 
+
     
   </div>
 </nav>

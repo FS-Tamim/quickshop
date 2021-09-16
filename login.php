@@ -27,22 +27,37 @@ exit();
 }
 else
 {
-$extra="login.php";
-$email=$_POST['email'];
-$uip=$_SERVER['REMOTE_ADDR'];
-$status=0;
-$log=mysqli_query($con,"insert into userlog(userEmail,userip,status) values('$email','$uip','$status')");
-$host  = $_SERVER['HTTP_HOST'];
-$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-$_SESSION['errmsg']='<div class="alert alert-danger alert-dismissible fade show" role="alert">
-<strong>Invalid Email or password</strong>
-
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>';
-exit();
+    $query=mysqli_query($con,"SELECT * FROM admin WHERE email='$email' and password='$password'");
+    $num=mysqli_fetch_array($query);
+  if($num>0)
+  {$extra="index.php";
+    $_SESSION['alogin']=$_POST['email'];
+    $_SESSION['aid']=$num['id'];
+    $_SESSION['adminname']=$num['name'];
+    $uip=$_SERVER['REMOTE_ADDR'];
+    $host=$_SERVER['HTTP_HOST'];
+  $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+  header("location:http://$host$uri/$extra");
+  exit();
+  
+  }
+  else{
+    $extra="login.php";
+  $email=$_POST['email'];
+  $uip=$_SERVER['REMOTE_ADDR'];
+  $status=0;
+  $log=mysqli_query($con,"insert into userlog(userEmail,userip,status) values('$email','$uip','$status')");
+  $host  = $_SERVER['HTTP_HOST'];
+  $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+  header("location:http://$host$uri/$extra");
+  $_SESSION['errmsg']='<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Invalid email id or Password</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>';
+  exit();
+  }
 }
 }
 else{

@@ -10,7 +10,7 @@ if(isset($_POST['submit']))
 
 
 
-	move_uploaded_file($_FILES["productimage1"]["tmp_name"],"productimages/$pid/".$_FILES["productimage1"]["name"]);
+	move_uploaded_file($_FILES["productimage1"]["tmp_name"],"../admin/productimages/$pid/".$_FILES["productimage1"]["name"]);
 	$sql=mysqli_query($con,"update  products set productImage1='$productimage1' where id='$pid' ");
 $_SESSION['msg']="Product Image Updated Successfully !!";
 
@@ -157,7 +157,7 @@ while($row=mysqli_fetch_array($query))
                                     <div class="control-group">
                                         <label class="control-label" for="basicinput">Current Product Image1</label>
                                         <div class="controls">
-                                            <img src="productimages/<?php echo htmlentities($pid);?>/<?php echo htmlentities($row['productImage1']);?>"
+                                            <img src="../admin/productimages/<?php echo htmlentities($pid);?>/<?php echo htmlentities($row['productImage1']);?>"
                                                 width="200" height="100">
                                         </div>
                                     </div>

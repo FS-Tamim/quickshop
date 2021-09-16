@@ -70,11 +70,8 @@ if($pid==$opid){
 
     <!-- Customizable CSS -->
     <style>
-      .btn{
-         
-        font-weight: bold !important;
-      }
-      .cart_btn{
+     
+     .cart_btn{
         margin-left: 15%;
         margin-top: 5%;
       }
@@ -586,6 +583,17 @@ if($pid==$opid){
     .name {
         font-weight: bold;
     }
+    .btn{
+    background-color: #FFD300;
+    font-weight: bold !important;
+    color: #181818;
+}
+.btn:hover{
+    background-color: #ffdb4d;
+}
+.control-group{
+    margin-bottom: 1.5% !important;
+}
     
     </style>
 
