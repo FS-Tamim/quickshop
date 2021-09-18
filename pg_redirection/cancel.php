@@ -97,6 +97,7 @@
                 <h2 class="text-center text-danger">Invalid Information.</h2>
                 <?php endif ?>
             </div>
+            <a href="../order-history.php" class="btn btn-primary btn-lg btn-block">Continue Shopping</></a>
         </div>
     </div>
 </body>

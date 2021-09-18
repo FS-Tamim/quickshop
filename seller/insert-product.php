@@ -42,11 +42,10 @@ $_SESSION['msg']="Product Inserted Successfully !!";
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Admin Portal</title>
+    <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
     <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 
-    <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
-        rel='stylesheet'>
     
      <style>
          .module-head h3{
@@ -63,6 +62,10 @@ $_SESSION['msg']="Product Inserted Successfully !!";
                 font-weight: bold;
             }
             .module-body{
+                background-color: #282828 ;
+                
+            }
+            .module{
                 background-color: #282828 ;
                 
             }
@@ -100,6 +103,9 @@ $_SESSION['msg']="Product Inserted Successfully !!";
            .control-group{
              margin-bottom: 1.5% !important;
             }
+            .wrapper{
+                margin-top: 5%;
+            }
 
     
        
@@ -109,8 +115,10 @@ $_SESSION['msg']="Product Inserted Successfully !!";
 </head>
 
 <body>
+    <header>
     <?php include('include/header.php');
     ?>
+    </header>
     <div class="wrapper">
         <div class="container">
             <div class="row"><?php include('include/sidebar.php');

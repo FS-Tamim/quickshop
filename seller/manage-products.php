@@ -46,6 +46,9 @@ if(isset($_GET['del']))
         .content{
             background-color: #303030;
         }
+        .wrapper{
+            margin-top: 5%;
+        }
     </style>
 </head>
 

@@ -9,7 +9,7 @@ class OrderTransaction {
     }
 
     public function saveTransactionQuery($post_data)
-    {
+    {   $userId=$post_data['userId'];
         $name = $post_data['cus_name'];
         $email = $post_data['cus_email'];
         $phone = $post_data['cus_phone'];
@@ -18,8 +18,12 @@ class OrderTransaction {
         $transaction_id = $post_data['tran_id'];
         $currency = $post_data['currency'];
 
-        $sql = "INSERT INTO orders (name, email, phone, amount, address, status, transaction_id,currency)
-                                    VALUES ('$name', '$email', '$phone','$transaction_amount','$address','Pending', '$transaction_id','$currency')";
+        // $sql = "INSERT INTO orders (userId,name, email, phone, amount, address, status, transaction_id,currency)
+        //                             VALUES ('$userId','$name', '$email', '$phone','$transaction_amount','$address','Pending', '$transaction_id','$currency')";
+        $sql="update orders set name='$name',email='$email',phone='$phone', address='$address',amount='$transaction_amount',transaction_id='$transaction_id',currency='$currency',status='Pending' where userId='" .$userId . "' and paymentMethod is null";
+
+       
+
 
         return $sql;
     }
@@ -31,4 +35,3 @@ class OrderTransaction {
         return $sql;
     }
 }
-

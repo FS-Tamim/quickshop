@@ -1,8 +1,9 @@
 
 <?php
 session_start();
+error_reporting(0);
 include('../includes/config.php');
-if(strlen($_SESSION['login'])==0)
+if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:login.php');
 }
@@ -35,10 +36,18 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 }
 
 </script>
-<style>
-	  .table,.module-head,th,td{
+
+	  <style>
+        .module{
+            backdrop-filter: #303030 !important;
+        }
+		.module-head{
+			width: 100% !important;
+		}
+         .table,.module-head,th,td{
             background-color:#303030;
             color: white;
+			
         }
         th:hover{
             background-color: #383838;
@@ -47,6 +56,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
             color: white !important;
             font-weight: bold;
             font-size: 30px;
+			padding: 3%;
         }
         .icon-edit{
             color: green;
@@ -54,7 +64,11 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
         .icon-remove-sign{
             color: red;
         }
-</style>
+        .content{
+            background-color: #303030;
+        }
+    </style>
+
 </head>
 <body>
 <?php include('include/header.php');?>
@@ -68,7 +82,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 
 	<div class="module">
 							<div class="module-head">
-								<h3>Pending Orders</h3>
+								<h3>Delivered Orders</h3>
 							</div>
 							<div class="module-body table">
 	<?php if(isset($_GET['del']))
@@ -82,7 +96,8 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 									<br />
 
 							
-								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered" >
+								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered
+								" >
 									<thead>
 										<tr>
 											<th>#</th>
@@ -102,7 +117,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 <tbody>
 <?php 
 $st='Delivered';
-$query=mysqli_query($con,"select users.name as username,users.email as useremail,users.contactno as usercontact,users.shippingAddress as shippingaddress,users.shippingCity as shippingcity,users.shippingState as shippingstate,users.shippingPincode as shippingpincode,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join users on  orders.userId=users.id join products on products.id=orders.productId where orders.orderStatus='$st'");
+$query=mysqli_query($con,"select users.name as username,users.email as useremail,users.contactno as usercontact,users.shippingAddress as shippingaddress,users.shippingCity as shippingcity,users.shippingState as shippingstate,users.shippingPincode as shippingpincode,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join users on  orders.userId=users.id join products on products.id=orders.productId where orders.status='$st'");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
@@ -110,7 +125,7 @@ while($row=mysqli_fetch_array($query))
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
 											<td><?php echo htmlentities($row['username']);?></td>
-											<td><?php echo htmlentities($row['useremail']);?>/<?php echo htmlentities($row['usercontact']);?></td>
+											<td><?php echo htmlentities($row['useremail']);?></td>
 										
 											<td><?php echo htmlentities($row['shippingaddress'].",".$row['shippingcity'].",".$row['shippingstate']."-".$row['shippingpincode']);?></td>
 											<td><?php echo htmlentities($row['productname']);?></td>

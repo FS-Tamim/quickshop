@@ -1,10 +1,5 @@
 <?php
-######
-# THIS FILE IS ONLY AN EXAMPLE. PLEASE MODIFY AS REQUIRED.
-# Contributors: 
-#       Md. Rakibul Islam <rakibul.islam@sslwireless.com>
-#       Prabal Mallick <prabal.mallick@sslwireless.com>
-######
+
 
 error_reporting(0);
 ini_set('display_errors', 0);
@@ -76,8 +71,11 @@ ini_set('display_errors', 0);
                         <td><?= $_POST['amount'] . ' ' . $_POST['currency'] ?></td>
                     </tr>
                 </table>
-
+                
                 <?php
+                $con->query("update orders set paymentMethod='".$_POST['card_issuer']."'  WHERE transaction_id='".$_POST['tran_id']."' and paymentMethod is null");
+
+                
 
                         } else { // update query returned error
 
@@ -100,6 +98,7 @@ ini_set('display_errors', 0);
                 ?>
 
             </div>
+            <a href="../order-history.php" class="btn btn-primary btn-lg btn-block">Continue Shopping</></a>
         </div>
     </div>
 </body>

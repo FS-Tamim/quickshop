@@ -45,19 +45,28 @@ if(strlen($_SESSION['login'])==0)
 header('location:login.php');
 }
 else{
+$extra="example_hosted.php";
+
+
+
+// $host  = $_SERVER['HTTP_HOST'];
+// $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 
 	$quantity=$_POST['quantity'];
 	$pdd=$_SESSION['pid'];
 	$value=array_combine($pdd,$quantity);
-
-
+    
+           
 		foreach($value as $qty=> $val34){
 
-
+    
 
 mysqli_query($con,"insert into orders(userId,productId,quantity) values('".$_SESSION['id']."','$qty','$val34')");
-header('location:example_hosted.php');
-}
+unset($_SESSION['cart']);
+//header("location:http://$host$uri/$extra?price=".$_SESSION['tp']);
+header("location:example_hosted.php");
+
+ }
 }
 }
 
@@ -350,7 +359,7 @@ while ($rt=mysqli_fetch_array($qry)) {
 
                                             <div class="cart-grand-total">
                                                 Grand Total<span class="inner-left-md">
-                                                    <?php echo $_SESSION['tp']="$totalprice". ".00 Tk."; ?></span>
+                                                    <?php echo $_SESSION['tp']="$totalprice"; ?></span>
                                             </div>
                                         </th>
                                     </tr>

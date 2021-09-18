@@ -17,6 +17,20 @@ include('../includes/config.php');
     <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
     <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
         rel='stylesheet'>
+        <style>
+        .table,.module-head,th,td{
+            background-color:#303030;
+            color: white;
+        }
+        th:hover{
+            background-color: #383838;
+        }
+        .module-head h3{
+            color: white !important;
+            font-weight: bold;
+            font-size: 30px;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,7 +51,7 @@ include('../includes/config.php');
 
 
                                 <table cellpadding="0" cellspacing="0"
-                                    class=" table table-bordered table-striped	 display" width="100%">
+                                    class=" table table-bordered display" width="100%">
                                     <thead>
                                         <tr>
                                             <th></th>

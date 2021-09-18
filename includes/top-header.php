@@ -166,7 +166,7 @@ else{
                     <li><a class="nav-link" href="admin/change_password.php">Admin Portal</a></li>
                     <li><a class="nav-link" href="admin/change_password.php"><i class="icon fa fa-user"></i>
                             <?php echo htmlentities( $_SESSION['adminname']);?></a></li>
-                    <li><a class="nav-link" href="logout.php"><i class="icon fa fa-sign-out"></i>Logout</a></li>
+                    <li><a class="nav-link" href="admin/adminlogout.php"><i class="icon fa fa-sign-out"></i>Logout</a></li>
                     <?php   } else{?>
 						<li class="nav-item dropdown"> 
 	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

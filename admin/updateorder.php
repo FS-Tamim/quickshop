@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../includes/config.php');
-if(strlen($_SESSION['login'])==0)
+if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:login.php');
 }
@@ -12,7 +12,7 @@ $status=$_POST['status'];
 $remark=$_POST['remark'];//space char
 
 $query=mysqli_query($con,"insert into ordertrackhistory(orderId,status,remark) values('$oid','$status','$remark')");
-$sql=mysqli_query($con,"update orders set orderStatus='$status' where id='$oid'");
+$sql=mysqli_query($con,"update orders set status='$status' where id='$oid'");
 echo "<script>alert('Order updated sucessfully...');</script>";
 //}
 }
@@ -85,7 +85,7 @@ $st='Delivered';
    $rt = mysqli_query($con,"SELECT * FROM orders WHERE id='$oid'");
      while($num=mysqli_fetch_array($rt))
      {
-     $currrentSt=$num['orderStatus'];
+     $currrentSt=$num['status'];
    }
      if($st==$currrentSt)
      { ?>

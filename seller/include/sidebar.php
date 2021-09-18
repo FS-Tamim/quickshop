@@ -33,7 +33,7 @@
     
     font-weight: bold;
 }
-.title:li{
+.title li{
     color: orange !important;
     
     font-weight: bold;
@@ -46,7 +46,7 @@
     <div class="">
     <ul class="widget widget-menu unstyled">
             <li>
-                <a class="collapsed" data-toggle="collapse" href="#togglePages" class="title">
+                <a class="collapsed title" data-toggle="collapse" href="#togglePages" class="title">
                     <i class="menu-icon icon-cog"></i>
                     <i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right"></i>
                     Order Management
@@ -108,7 +108,7 @@ $num1 = mysqli_num_rows($rt);
         <li><a class="title" class="title"href="seller-account.php"><i class="menu-icon icon-tasks"></i> My account </a></li>
          
             <li>
-                <a class="title" href="../logout.php" class="title"href="logout.php">
+                <a class="title" href="sellerlogout.php" class="title"href="logout.php">
                     <i class="menu-icon icon-signout"></i>
                     Logout
                 </a>

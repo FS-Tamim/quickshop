@@ -74,7 +74,7 @@ $st='Delivered';
    $rt = mysqli_query($con,"SELECT * FROM orders WHERE id='$oid'");
      while($num=mysqli_fetch_array($rt))
      {
-     $currrentSt=$num['orderStatus'];
+     $currrentSt=$num['status'];
    }
      if($st==$currrentSt)
      { ?>

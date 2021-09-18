@@ -21,23 +21,25 @@ include('../includes/config.php');
         rel='stylesheet'>
 
         <style>
+        .module{
+            backdrop-filter: #303030 !important;
+        }
+		.module-head{
+			width: 100% !important;
+		}
          .table,.module-head,th,td{
             background-color:#303030;
             color: white;
+			
         }
         th:hover{
             background-color: #383838;
-        }
-        /* .module-head{
-            width: 100% !important;
-        } */
-        .module-body{
-            width: 100% !important;
         }
         .module-head h3{
             color: white !important;
             font-weight: bold;
             font-size: 30px;
+			padding: 3%;
         }
         .icon-edit{
             color: green;
@@ -46,7 +48,7 @@ include('../includes/config.php');
             color: red;
         }
         .content{
-            width: 120%;
+            background-color: #303030;
         }
     </style>
     </head>

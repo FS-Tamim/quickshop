@@ -4,19 +4,43 @@ error_reporting(0);
 include('includes/config.php');
 if(strlen($_SESSION['login'])==0)
     {   
-header('location:SignupLogin.php');
+header('location:login.php');
 }
  else{
     $query=mysqli_query($con, "select * from users where id='".$_SESSION['id']."'");
-
+    $name='';
+    $email='';
+    $phone='';
+    $transaction_amount = $_SESSION['tp'];
+    $address='';
+    $order_id = "COD_" . uniqid();;
+    $currency = "BDT";
     while($row=mysqli_fetch_array($query)) {
-// 	if (isset($_POST['submit'])) {
+       
+        $name = $row['name'];
+        $email = $row['email'];
+        $phone = $row['contactno'];
+       
+        // $address = $row['billingAddress']. ' ' .$row['billingState']. ' ' .$row['billingCity']. ' ' .$row['billingPincode'];
+        $order_id = "COD_" . uniqid();
+        $currency = "BDT";
+        echo "<script>console.log('Debug Objects: " .$name . "' );</script>";
+         
+      
+    }
+    if (isset($_POST['cashsubmit'])) {
+        
 
-// 		mysqli_query($con,"update orders set paymentMethod='".$_POST['paymethod']."' where userId='".$_SESSION['id']."' and paymentMethod is null ");
-// 		unset($_SESSION['cart']);
-// 		header('location:order-history.php');
-
-// 	}
+		// mysqli_query($con,"update orders set paymentMethod='COD' where userId='".$_SESSION['id']."' and paymentMethod is null ");
+        mysqli_query($con,"update orders set name='$name',email='$email',phone='$phone', address='$address',amount='$transaction_amount',transaction_id='$order_id',currency='$currency',status='Processing',paymentMethod='COD' where userId='" .$_SESSION['id'] . "' and paymentMethod is null");
+		
+		 header('location:order-history.php');
+    }
+     
+	
+	
+   
+   
 ?>
 <!doctype html>
 <html lang="en">
@@ -65,30 +89,12 @@ header('location:SignupLogin.php');
                     <span class="badge badge-secondary badge-pill">3</span>
                 </h4>
                 <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Product name</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <span class="text-muted">1000</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Second product</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <span class="text-muted">50</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Third item</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <span class="text-muted">150</span>
-                    </li>
+
+
+
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (BDT)</span>
-                        <strong>value="<?php echo htmlentities($_SESSION['tp']);?>"</strong>
+                        <strong><?php echo htmlentities($_SESSION['tp']);?></strong>
                     </li>
                 </ul>
             </div>
@@ -99,7 +105,7 @@ header('location:SignupLogin.php');
                         <div class="col-md-12 mb-3">
                             <label for="firstName">Full name</label>
                             <input type="text" name="customer_name" class="form-control" id="customer_name"
-                                placeholder="" value="John Doe">
+                                placeholder="" value="<?php echo htmlentities($name);?>">
                             <div class="invalid-feedback">
                                 Valid customer name is required.
                             </div>
@@ -113,7 +119,7 @@ header('location:SignupLogin.php');
                                 <span class="input-group-text">+88</span>
                             </div>
                             <input type="text" name="customer_mobile" class="form-control" id="mobile"
-                                placeholder="Mobile" value="01711xxxxxx">
+                                placeholder="Mobile" value="<?php echo htmlentities($phone);?>">
                             <div class="invalid-feedback" style="width: 100%;">
                                 Your Mobile number is required.
                             </div>
@@ -123,7 +129,7 @@ header('location:SignupLogin.php');
                     <div class="mb-3">
                         <label for="email">Email <span class="text-muted">(Optional)</span></label>
                         <input type="email" name="customer_email" class="form-control" id="email"
-                            placeholder="you@example.com" value="you@example.com">
+                            placeholder="you@example.com" value="<?php echo htmlentities($email);?>">
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -131,8 +137,7 @@ header('location:SignupLogin.php');
 
                     <div class="mb-3">
                         <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                            value="93 B, New Eskaton Road">
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" value="Dhaka">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -171,12 +176,19 @@ header('location:SignupLogin.php');
                                 Zip code required.
                             </div>
                         </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="zip">Total Amount</label>
+                            <input type="text" value="<?php echo $_SESSION['tp'] ?>" name="amount" id="total_amount">
+
+                        </div>
                     </div>
-                    <?php } ?>
+
                     <hr class="mb-4">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="same-address">
-                        <input type="hidden" value="1200" name="amount" id="total_amount" />
+                        <input type="hidden" value="<?php echo htmlentities($_SESSION['id']);?>" name="userid"
+                            id="userid" />
+
                         <label class="custom-control-label" for="same-address">Shipping address is the same as my
                             billing
                             address</label>
@@ -186,8 +198,13 @@ header('location:SignupLogin.php');
                         <label class="custom-control-label" for="save-info">Save this information for next time</label>
                     </div>
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout
-                        (Hosted)</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Pay with SSLCommerz</button>
+                </form>
+                <br>
+                <br>
+                <form name="payment" method="post">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Cash on Delivery"
+                        name="cashsubmit">
                 </form>
             </div>
         </div>

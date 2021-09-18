@@ -34,27 +34,47 @@ header('location:my-wishlist.php');
 
 }
 }
+$btnability=0;
+
+$opids = array();
+
+$userid=$_SESSION['id'];
+$query=mysqli_query($con,"select orders.productId as opid,orders.orderDate as odate,orders.id as orderid from orders join users on orders.userId=users.id where orders.userId='$userid'");
+    
+    
+    while($row=mysqli_fetch_array($query)) {
+        array_push($opids,$row['opid']);
+        // $opid=$row['opid'];
+        
+
+}
+echo "<script>console.log('Debug Objects:pid " .$pid . "' );</script>";
+echo "<script>console.log('Debug Objects:opid " .$opid . "' );</script>";
+foreach ($opids as $opid) {
+    if($pid==$opid){
+        $btnability=0;
+        echo "<script>console.log('Debug Objects: " .$btnability . "' );</script>";
+        break;
+       }   
+       else{
+         $btnability=1;
+         echo "<script>console.log('Debug Objects: " .$btnability . "' );</script>";
+       }  
+}
+
 if(isset($_POST["rating_data"]))
-{  
-    echo $pid;
-    $userid=$_SESSION['id'];
+{   
+    
     $user_name=$_POST['user_name'];
 	$user_rating=$_POST['rating_data'];
 	$user_review=$_POST['user_review'];
    
-    $query=mysqli_query($con,"select orders.productId as opid,orders.orderDate as odate,orders.id as orderid from orders join users on orders.userId=users.id where orders.userId='$userid'");
-    $opid=0;
-    
-    while($row=mysqli_fetch_array($query)) {
-    
-         $opid=$row['opid'];
+   
+       
+       $review=mysqli_query($con,"insert into review_table (productId,userId, user_rating, user_review) values('$pid','$userid','$user_rating','$user_review')"); 
 
+    
 }
-if($pid==$opid){
-    $review=mysqli_query($con,"insert into review_table (productId,userId, user_rating, user_review) values('$pid',' $userid','$user_rating','$user_review')"); 
-      
-   }    
-} 
 
 
 ?>
@@ -860,7 +880,7 @@ echo $AVGRATE;
                                 <b><span id="average_rating"><?php echo round($AVGRATE,1);?></span>/5</b>
                             </h1>
                             <div class="mb-3">
-                                <i class="fas fa-star star-light mr-1 main_star"></i>
+                                <i class="fas fa-star star-light mr-1 main_star" ></i>
                                 <i class="fas fa-star star-light mr-1 main_star"></i>
                                 <i class="fas fa-star star-light mr-1 main_star"></i>
                                 <i class="fas fa-star star-light mr-1 main_star"></i>
@@ -884,8 +904,8 @@ echo $AVGRATE;
 
                             <div class="progress-label-right">(<span id="total_four_star_review"><?=$fourStar;?></span>)
                             </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
+                            <div class="progress w3-light-grey" style="width:80%">
+                                <div class="progress-bar bg-warning w3-red" role="progressbar" aria-valuenow="0"
                                     aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
                             </div>
                             </p>
@@ -922,9 +942,17 @@ echo $AVGRATE;
                             </p>
                         </div>
                         <div class="col-sm-4 text-center">
-                            <h3 class="mt-4 mb-3">Write Review Here</h3>
-                            <button type="button" name="add_review" id="add_review"
-                                class="btn btn-primary">Review</button>
+                        <h3 class="mt-4 mb-3">Write Review Here</h3>
+                            <?php if($btnability==1){?>
+                            <small class='text-warning'><i class="fas fa-user-check"></i>You are not a verified buyer
+                                for this
+                                product</small>
+                            <button type="button" class="btn btn-primary" disabled>Review</button>
+                            <?php } else {?>
+
+                            <button type="button" name="add_review" id="add_review" class="btn btn-primary">
+                                Review</button>
+                            <?php }?>
                         </div>
                     </div>
 
@@ -982,7 +1010,7 @@ echo $AVGRATE;
                     </div>
                     <div class="modal-body">
 
-                        <h4 class="text-center mt-2 mb-4">
+                        <h4 class="text-center mt-2 mb-4" style="">
                             <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
                             <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
                             <i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>

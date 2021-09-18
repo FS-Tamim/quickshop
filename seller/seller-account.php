@@ -171,6 +171,7 @@ $passwordError='<div class="alert alert-danger alert-dismissible fade show" role
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Now</title>
+    <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -178,9 +179,9 @@ $passwordError='<div class="alert alert-danger alert-dismissible fade show" role
 .panel{
 	background-color: #181818 !important;
     color: orange;      
-    margin-top: 1%;
+    /* margin-top: 1%; */
     margin-bottom: 3%;
-    padding:10px;
+    /* padding:10px; */
     border-radius: 5px;
     box-shadow: 0 0 3px  gray;
 }	
@@ -193,6 +194,15 @@ $passwordError='<div class="alert alert-danger alert-dismissible fade show" role
     background-color:#383838;
     color: white;
 }
+.form-group  .form-control:focus {
+                outline: none !important;
+                border:1px solid #181818;
+                box-shadow: 0 0 2px #FFD300;
+            }
+            .form-group  .form-control{
+                background-color: #404040 !important;
+                color: white !important;
+            }
 .btn{
             background-color: #FFD300;
             font-weight: bold !important;
@@ -204,14 +214,25 @@ $passwordError='<div class="alert alert-danger alert-dismissible fade show" role
            .control-group{
              margin-bottom: 1.5% !important;
             }
-
+/* header{
+    margin-top:-3%;
+} */
+/* .body-content{
+    margin-top:2%;
+} */
+.headermain{
+    display: flex;
+    margin-right:30%;
+}
 </style>
 </head>
 
 <body>
-    <header>
-        <?php include('include/header.php');?>
+    <header class="headermain">
+        
+    <?php include('include/header.php');?>
     </header>
+    
 
 
     <div class="body-content">

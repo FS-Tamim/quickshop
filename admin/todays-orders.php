@@ -2,7 +2,7 @@
 <?php
 session_start();
 include('../includes/config.php');
-if(strlen($_SESSION['login'])==0)
+if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:login.php');
 }
@@ -35,8 +35,12 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 }
 
 </script>
-<style>
-	  .table,.module-head,th,td{
+
+	 <style>
+        .module{
+            backdrop-filter: #303030 !important;
+        }
+         .table,.module-head,th,td{
             background-color:#303030;
             color: white;
         }
@@ -54,7 +58,11 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
         .icon-remove-sign{
             color: red;
         }
-</style>
+        .content{
+            background-color: #303030;
+        }
+    </style>
+
 </head>
 <body>
 <?php include('include/header.php');?>
@@ -68,7 +76,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 
 	<div class="module">
 							<div class="module-head">
-								<h3>Pending Orders</h3>
+								<h3>Todays Orders</h3>
 							</div>
 							<div class="module-body table">
 	<?php if(isset($_GET['del']))
@@ -82,7 +90,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 									<br />
 
 							
-			<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display " >
+			<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered  display " >
 									<thead>
 										<tr>
 											<th>#</th>
@@ -113,7 +121,7 @@ while($row=mysqli_fetch_array($query))
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
 											<td><?php echo htmlentities($row['username']);?></td>
-											<td><?php echo htmlentities($row['useremail']);?>/<?php echo htmlentities($row['usercontact']);?></td>
+											<td><?php echo htmlentities($row['useremail']);?></td>
 										
 											<td><?php echo htmlentities($row['shippingaddress'].",".$row['shippingcity'].",".$row['shippingstate']."-".$row['shippingpincode']);?></td>
 											<td><?php echo htmlentities($row['productname']);?></td>

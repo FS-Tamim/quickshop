@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -13,7 +14,7 @@ use SslCommerz\SslCommerzNotification;
 
 # Organize the submitted/inputted data
 $post_data = array();
-
+$post_data['userId']=$_POST['userid'];
 $post_data['total_amount'] = $_POST['amount'];
 $post_data['currency'] = "BDT";
 $post_data['tran_id'] = "SSLCZ_TEST_" . uniqid();

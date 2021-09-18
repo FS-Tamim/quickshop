@@ -1,8 +1,9 @@
 
 <?php
 session_start();
+error_reporting(0);
 include('../includes/config.php');
-if(strlen($_SESSION['login'])==0)
+if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:login.php');
 }
@@ -36,7 +37,11 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 
 </script>
 <style>
-	  .table,.module-head,th,td{
+	 
+        .module{
+            backdrop-filter: #303030 !important;
+        }
+         .table,.module-head,th,td{
             background-color:#303030;
             color: white;
         }
@@ -54,6 +59,10 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
         .icon-remove-sign{
             color: red;
         }
+        .content{
+            background-color: #303030;
+        }
+    
 </style>
 </head>
 <body>
@@ -102,7 +111,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 <tbody>
 <?php 
 $status='Delivered';
-$query=mysqli_query($con,"select users.name as username,users.email as useremail,users.contactno as usercontact,users.shippingAddress as shippingaddress,users.shippingCity as shippingcity,users.shippingState as shippingstate,users.shippingPincode as shippingpincode,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join users on  orders.userId=users.id join products on products.id=orders.productId where orders.	orderStatus!='$status' or orders.orderStatus is null");
+$query=mysqli_query($con,"select users.name as username,users.email as useremail,users.contactno as usercontact,users.shippingAddress as shippingaddress,users.shippingCity as shippingcity,users.shippingState as shippingstate,users.shippingPincode as shippingpincode,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join users on  orders.userId=users.id join products on products.id=orders.productId where orders.status!='$status' or orders.status is null");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
@@ -110,7 +119,7 @@ while($row=mysqli_fetch_array($query))
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
 											<td><?php echo htmlentities($row['username']);?></td>
-<td><?php echo htmlentities($row['useremail']);?>/<?php echo htmlentities($row['usercontact']);?></td>
+<td><?php echo htmlentities($row['useremail']);?></td>
 <td><?php echo htmlentities($row['shippingaddress'].",".$row['shippingcity'].",".$row['shippingstate']."-".$row['shippingpincode']);?></td>
 											<td><?php echo htmlentities($row['productname']);?></td>
 											<td><?php echo htmlentities($row['quantity']);?></td>

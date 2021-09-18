@@ -176,7 +176,7 @@ $_SESSION['msg']="Old Password not match !!";
 
                                     <div class="control-group">
                                         <div class="controls">
-                                            <button type="submit" name="namesubmit" class="lnk">Change</button>
+                                            <button type="submit" name="namesubmit" class="btn">Change</button>
                                         </div>
                                     </div>
                                 </form>
@@ -211,7 +211,7 @@ $_SESSION['msg']="Old Password not match !!";
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">
-                                            <button type="submit" name="submit" class="btn">Submit</button>
+                                            <button type="submit" name="submit" class="btn">Change</button>
                                         </div>
                                     </div>
                                 </form>

@@ -1,3 +1,5 @@
+
+  
 <style>
     .navbar {
 	position: static!important;
@@ -9,6 +11,10 @@
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 	box-shadow: 0 1px 2px rgba(0,0,0,0.15)
+}
+.shopname{
+    color: orange;
+    font-weight: bold;  
 }
 </style>
 <div class="container">
@@ -23,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 
-            <ul class="navbar-nav">
+            <ul class="navbar-nav unstyled">
                 <?php
                 if(isset($_SESSION['slogin'])){
                     if(strlen($_SESSION['slogin'])!==0)
