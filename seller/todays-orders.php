@@ -40,6 +40,35 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
             600 + ',height=' + 600 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
     }
     </script>
+     <style>
+        .module{
+            backdrop-filter: #303030 !important;
+        }
+         .table,.module-head,th,td{
+            background-color:#303030;
+            color: white;
+        }
+        th:hover{
+            background-color: #383838;
+        }
+        .module-head h3{
+            color: white !important;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .icon-edit{
+            color: green;
+        }
+        .icon-remove-sign{
+            color: red;
+        }
+        .content{
+            background-color: #303030;
+        }
+        .wrapper{
+                margin-top: 5%;
+            }
+    </style>
 </head>
 
 <body>
@@ -66,7 +95,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
     ?><br />
                                 <table cellpadding="0" cellspacing="0"
-                                    class=" table table-bordered table-striped  w-auto display table-responsive">
+                                    class=" table table-bordered  w-auto display table-responsive">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -83,12 +112,13 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
                                     </thead>
                                     <tbody><?php
                          $shopname= $_SESSION['shopname'];   
-                        //  echo "<script>console.log('Debug Objects: " .$shopname . "' );</script>";      
+                     echo "<script>console.log('Debug Objects: " .$shopname . "' );</script>";      
  $f1="00:00:00";
     $from=date('Y-m-d')." ".$f1;
     $t1="23:59:59";
     $to=date('Y-m-d')." ".$t1;
-    $query=mysqli_query($con, "select orders.name as username,orders.email as useremail,orders.phone as usercontact,orders.shipaddress as shippingaddress,orders.billaddress as billingaddress,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join products on products.id=orders.productId where products.merchant='$shopname' and orders.orderDate Between '$from' and '$to'");
+    // $query=mysqli_query($con, "select orders.name as username,orders.email as useremail,orders.phone as usercontact,orders.shipaddress as shippingaddress,orders.billaddress as billingaddress,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join products on products.id=orders.productId where products.merchant='$shopname' and orders.orderDate Between '$from' and '$to'");
+    $query=mysqli_query($con, "select orders.name as username,orders.email as useremail,orders.phone as usercontact,orders.shipaddress as shippingaddress,orders.billaddress as billingaddress,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join products on products.id=orders.productId where products.merchant='$shopname'");
     $cnt=1;
 
     while($row=mysqli_fetch_array($query)) {

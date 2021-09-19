@@ -113,7 +113,7 @@ header("location:example_hosted.php");
 
 
     .productname {
-        color: #ffffff;
+        color: #FFD300;
         text-decoration: none !important;
     }
 
@@ -140,10 +140,9 @@ header("location:example_hosted.php");
 .btn:hover{
     background-color: #ffdb46;
 }
-/* th,tr{
-	background-color: #666666;
-	color: white;
-} */
+.cart-product-description{
+    color: #FFD300;
+}
 table{
 	border-radius: 5px;
 }
@@ -242,11 +241,11 @@ if(!empty($_SESSION['cart'])){
                                                 </a>
                                             </td>
                                             <td class="cart-product-name-info">
-                                                <h4 class='cart-product-description'><a class="productname"
+                                            <h5 class='cart-product-description' ><a class="productname"
                                                         href="product-details.php?pid=<?php echo htmlentities($row['id']);?>"><?php echo $row['productName'];
 
 
-						 ?></a></h4>
+						                                    ?></a></h5>
 
 
                                             </td>
@@ -280,8 +279,8 @@ if(!empty($_SESSION['cart'])){
                                         </tr>
 
                                         <?php } }
-$_SESSION['pid']=$pdtid;
-				?>
+                                                  $_SESSION['pid']=$pdtid;
+				                        ?>
 
                                     </tbody>
                                 </table>
@@ -359,7 +358,7 @@ while ($rt=mysqli_fetch_array($qry)) {
 
                                             <div class="cart-grand-total">
                                                 Grand Total<span class="inner-left-md">
-                                                    <?php echo $_SESSION['tp']="$totalprice"; ?></span>
+                                                    <?php echo $_SESSION['tp']="$totalprice"; ?></span> BDT.
                                             </div>
                                         </th>
                                     </tr>

@@ -2,21 +2,35 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-if(isset($_GET['action']) && $_GET['action']=="add"){
-	$id=intval($_GET['id']);
-	if(isset($_SESSION['cart'][$id])){
-		$_SESSION['cart'][$id]['quantity']++;
-	}else{
-		$sql_p="SELECT * FROM products WHERE id={$id}";
-		$query_p=mysqli_query($con,$sql_p);
-		if(mysqli_num_rows($query_p)!=0){
-			$row_p=mysqli_fetch_array($query_p);
-			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productPrice']);
-			header('location:index.php');
-		}else{
-			$message="Product ID is invalid";
-		}
-	}
+// if(isset($_GET['action']) && $_GET['action']=="add"){
+// 	$id=intval($_GET['id']);
+// 	if(isset($_SESSION['cart'][$id])){
+// 		$_SESSION['cart'][$id]['quantity']++;
+// 	}else{
+// 		$sql_p="SELECT * FROM products WHERE id={$id}";
+// 		$query_p=mysqli_query($con,$sql_p);
+// 		if(mysqli_num_rows($query_p)!=0){
+// 			$row_p=mysqli_fetch_array($query_p);
+// 			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productPrice']);
+// 			header('location:index.php');
+// 		}else{
+// 			$message="Product ID is invalid";
+// 		}
+// 	}
+// }
+if(isset($_GET['action']) && $_GET['action']=="wishlist" ){
+	if(strlen($_SESSION['login'])==0)
+    {   
+header('location:SignupLogin.php');
+}
+else
+{
+    $proid=intval($_GET['id']);
+mysqli_query($con,"insert into wishlist(userId,productId) values('".$_SESSION['id']."','$proid')");
+
+header('location:index.php');
+
+}
 }
 
 
@@ -212,8 +226,8 @@ while ($row=mysqli_fetch_array($ret))
 			</div><!-- /.product-price -->
 			
 		</div><!-- /.product-info -->
-					<div class="action"><a href="index.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="btn "><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to cart</a></div>
+					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn "><i
+                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
 			</div><!-- /.product -->
       
 			</div><!-- /.products -->
@@ -267,8 +281,8 @@ while ($row=mysqli_fetch_array($ret))
 			</div><!-- /.product-price -->
 			
 		</div><!-- /.product-info -->
-					<div class="action"><a href="index.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to cart</a></div>
+					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn"><i
+                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
 			</div><!-- /.product -->
       
 			</div><!-- /.products -->
@@ -322,8 +336,8 @@ while ($row=mysqli_fetch_array($ret))
 			</div>
 			
 		</div>
-					<div class="action"><a href="index.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to cart</a></div>
+					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn"><i
+                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
 			</div>
       
 			</div>
@@ -379,8 +393,8 @@ while ($row=mysqli_fetch_array($ret))
 			</div>
 			
 		</div>
-					<div class="action"><a href="index.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to cart</a></div>
+					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn"><i
+                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
 			</div>
 			</div>
 		</div>
@@ -426,8 +440,8 @@ while ($row=mysqli_fetch_array($ret))
 			</div>
 			
 		</div>
-					<div class="action"><a href="index.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to cart</a></div>
+					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn"><i
+                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
 			</div>imary
 			</div>
 		</div>
@@ -484,8 +498,8 @@ while ($row=mysqli_fetch_array($ret))
 												</span>
 
 											</div><!-- /.product-price -->
-											<div class="action"><a href="index.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="btn "><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to cart</a></div>
+											<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn "><i
+                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
 										</div>
 									</div><!-- /.col -->
 								</div><!-- /.product-micro-row -->

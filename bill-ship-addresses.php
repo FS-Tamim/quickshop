@@ -101,14 +101,7 @@ else{
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <style>
-    .lnk {
-        background-color: #000000 !important;
-        color: #FFFFFF !important;
-        font-size: 14px !important;
-        font-weight: bold !important;
-
-    }
-
+   
     .form-container {
         background-color: #181818;
      /* width:90% !important;  */
@@ -140,6 +133,14 @@ else{
 .mysaccountsidemenu{
 	
 	margin-top:1%!important;
+}
+.btn{
+    background-color: #FFD300 !important;
+    font-weight: bold !important;
+    color: #181818;
+}
+.btn:hover{
+    background-color: #ffdb4d;
 }
     </style>
 
@@ -208,7 +209,7 @@ else{
                                                             required="required"
                                                             value="<?php echo $row['billingPincode'];?>">
                                                     </div><button type="submit" name="update"
-                                                        class="btn-upper btn btn-secondary bg-dark lnk checkout-page-button">Update</button>
+                                                        class="btn">Update</button>
                                                 </form><?php
     }
 
@@ -259,7 +260,7 @@ else{
                                                     id="shippingpincode" name="shippingpincode" required="required"
                                                     value="<?php echo $row['shippingPincode'];?>">
                                             </div><button type="submit" name="shipupdate"
-                                                class="btn-upper btn  btn-secondary bg-dark lnk checkout-page-button">Update</button>
+                                                class="btn">Update</button>
                                         </form><?php
     }
 

@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+<?php error_reporting(0); ?>
 <style>
 .widget-menu a {
 	display: block;
@@ -7,10 +7,6 @@
 	padding: 15px;
 	text-decoration: none!important
 }
-.widget-menu>li {
-    list-style-type: none;
-}
-
 .widget-menu .menu-icon {
 	 
 	margin-right: 10px;
@@ -33,7 +29,7 @@
     
     font-weight: bold;
 }
-.title li{
+.title:li{
     color: orange !important;
     
     font-weight: bold;
@@ -55,13 +51,15 @@
                     <li>
                         <a href="todays-orders.php" class="title">
                             <i class="icon-tasks "></i>
-                            Today's Orders
+                            All Orders
                             <?php
+                            $shopname= $_SESSION['shopname'];  
   $f1="00:00:00";
 $from=date('Y-m-d')." ".$f1;
 $t1="23:59:59";
 $to=date('Y-m-d')." ".$t1;
- $result = mysqli_query($con,"SELECT * FROM Orders where orderDate Between '$from' and '$to'");
+//  $result = mysqli_query($con,"SELECT * FROM Orders where orderDate Between '$from' and '$to'");
+$result = mysqli_query($con,"SELECT * FROM Orders join products on products.id=orders.productId where products.merchant='$shopname' ");
 $num_rows1 = mysqli_num_rows($result);
 {
 ?>
@@ -75,7 +73,8 @@ $num_rows1 = mysqli_num_rows($result);
                             Pending Orders
                             <?php	
 	$status='Delivered';									 
-$ret = mysqli_query($con,"SELECT * FROM Orders where orderStatus!='$status' || orderStatus is null ");
+// $ret = mysqli_query($con,"SELECT * FROM Orders where orderStatus!='$status' || orderStatus is null ");
+$ret = mysqli_query($con,"SELECT * FROM Orders join products on products.id=orders.productId where products.merchant='$shopname' and ( status!='$status' || status is null) ");
 $num = mysqli_num_rows($ret);
 {?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
                             <?php } ?>
@@ -87,7 +86,8 @@ $num = mysqli_num_rows($ret);
                             <span class="title">Delivered Orders</span>
                             <?php	
 	$status='Delivered';									 
-$rt = mysqli_query($con,"SELECT * FROM Orders where orderStatus='$status'");
+// $rt = mysqli_query($con,"SELECT * FROM Orders where orderStatus='$status'");
+$rt = mysqli_query($con,"SELECT * FROM Orders join products on products.id=orders.productId where products.merchant='$shopname' and status='$status'");
 $num1 = mysqli_num_rows($rt);
 {?><b class="label green pull-right"><?php echo htmlentities($num1); ?></b>
                             <?php } ?>

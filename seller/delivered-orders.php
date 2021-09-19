@@ -37,6 +37,35 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
             600 + ',height=' + 600 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
     }
     </script>
+     <style>
+        .module{
+            backdrop-filter: #303030 !important;
+        }
+         .table,.module-head,th,td{
+            background-color:#303030;
+            color: white;
+        }
+        th:hover{
+            background-color: #383838;
+        }
+        .module-head h3{
+            color: white !important;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .icon-edit{
+            color: green;
+        }
+        .icon-remove-sign{
+            color: red;
+        }
+        .content{
+            background-color: #303030;
+        }
+        .wrapper{
+                margin-top: 5%;
+            }
+    </style>
 </head>
 
 <body>
@@ -69,7 +98,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 
                                 <table cellpadding="0" cellspacing="0" border="0"
-                                    class="datatable-1 table table-bordered table-striped	 display table-responsive">
+                                    class="datatable-1 table table-bordered 	 display table-responsive">
                                     <thead>
                                         <tr>
                                             <th>#</th>

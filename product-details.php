@@ -34,7 +34,7 @@ header('location:my-wishlist.php');
 
 }
 }
-$btnability=0;
+$btnability=1;
 
 $opids = array();
 
@@ -132,7 +132,7 @@ if(isset($_POST["rating_data"]))
         color: #aaaaaa;
     }
 
-    .single-product .product-info .stock-container .stock-box .label {
+    /* .single-product .product-info .stock-container .stock-box .label {
         font-size: 16px;
         font-family: 'FjallaOneRegular';
         line-height: 18px;
@@ -140,12 +140,12 @@ if(isset($_POST["rating_data"]))
         color: #666666;
         padding: 0px;
         font-weight: normal;
-    }
+    } */
 
-    .single-product .product-info .stock-container .stock-box .value {
+    /* .single-product .product-info .stock-container .stock-box .value {
         font-size: 14px;
         color: #ff7878;
-    }
+    } */
 
     .single-product .product-info .description-container {
         line-height: 20px;
@@ -532,7 +532,7 @@ if(isset($_POST["rating_data"]))
         width: 60px;
     }
 
-    .cnt-homepage .single-product .product-info-block .stock-container .stock-box .label {
+    /* .cnt-homepage .single-product .product-info-block .stock-container .stock-box .label {
         color: #434343;
         font-family: 'Roboto';
         font-size: 13px;
@@ -540,11 +540,11 @@ if(isset($_POST["rating_data"]))
         line-height: 20px;
         padding: 0;
         text-transform: none;
-    }
+    } */
 
-    .cnt-homepage .single-product .product-info-block .stock-container .stock-box .value {
+    /* .cnt-homepage .single-product .product-info-block .stock-container .stock-box .value {
         font-size: 13px;
-    }
+    } */
 
     .cnt-homepage .single-product .product-tabs .nav-tab-cell-detail li {
         margin-right: 10px;
@@ -614,7 +614,18 @@ if(isset($_POST["rating_data"]))
 .control-group{
     margin-bottom: 1.5% !important;
 }
-    
+.stock-box{
+    font-weight: bold;
+    color:black;
+}
+.btn{
+    background-color: #FFD300 !important;
+    font-weight: bold !important;
+    color: #181818;
+}
+.btn:hover{
+    background-color: #ffdb4d;
+}
     </style>
 
 
@@ -699,6 +710,19 @@ if(isset($_POST["rating_data"]))
                                             </div>
                                         </div>
                                     </div><!-- /.row -->
+                                    <div class="row">
+                                        <div class="col-sm-7">
+                                            <div class="stock-box">
+                                                <span class="label">Merchant :</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="stock-box">
+                                                <span class="value"
+                                                    id="availability"><?php echo htmlentities($row['merchant']);?></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="stock-container info-container m-t-10">
                                     <div class="row">
@@ -825,15 +849,15 @@ if(isset($_POST["rating_data"]))
                 </div><!-- /.col -->
 
             </div>
-            <?php } ?>
+           
         </div>
     </div> 
     <div class="container">
-            <h1 class="mt-5 mb-5">Review & Rating System in PHP & Mysql using Ajax</h1>
+            <h1 class="mt-5 mb-5">Review & Rating</h1>
             <div class="card">
-                <div class="card-header">Sample Product</div>
+                <div class="card-header font-weight-bold"><?php echo $row['productName'];?></div>
                 <?php
-   
+            }
     // $query=mysqli_query($con,"SELECT * FROM review_table ORDER BY review_id DESC WHERE id={$pid}");
 
 $query = mysqli_query($con,"SELECT AVG(user_rating) as AVGRATE from review_table WHERE productId={$pid}");
@@ -880,11 +904,15 @@ echo $AVGRATE;
                                 <b><span id="average_rating"><?php echo round($AVGRATE,1);?></span>/5</b>
                             </h1>
                             <div class="mb-3">
-                                <i class="fas fa-star star-light mr-1 main_star" ></i>
-                                <i class="fas fa-star star-light mr-1 main_star"></i>
-                                <i class="fas fa-star star-light mr-1 main_star"></i>
-                                <i class="fas fa-star star-light mr-1 main_star"></i>
-                                <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <?php
+                            for ($x = 1; $x <= round($AVGRATE,1); $x++) {
+                                
+                             
+                            ?>
+                            <i class="fas fa-star text-warning mr-1"></i>
+                            <?php
+                                      }    ?>
+
                             </div>
                             <h3><span id="total_review"><?=$Total_review;?></span> Review</h3>
                         </div>
@@ -947,7 +975,7 @@ echo $AVGRATE;
                             <small class='text-warning'><i class="fas fa-user-check"></i>You are not a verified buyer
                                 for this
                                 product</small>
-                            <button type="button" class="btn btn-primary" disabled>Review</button>
+                            <button type="button" class="btn" disabled>Review</button>
                             <?php } else {?>
 
                             <button type="button" name="add_review" id="add_review" class="btn btn-primary">
@@ -968,7 +996,7 @@ echo $AVGRATE;
                 <div class="row mb-3">
                     <div class="col-sm-1">
 
-                        <div class="rounded-circle bg-danger text-white pt-2 pb-2">
+                        <div class="rounded-circle bg-warning text-dark pt-2 pb-2">
                             <h3 class="text-center"><?=$db_review['username'][0];?></h3>
                         </div>
                     </div>
@@ -1056,7 +1084,7 @@ echo $AVGRATE;
         document.getElementById("addtocart").removeAttribute('href');
         document.getElementById("availability").style.color = "#cc0000";
     } else {
-        document.getElementById("addtocart").style.backgroundColor = "#db3d52";
+        document.getElementById("addtocart").style.backgroundColor = "#ffd300";
         document.getElementById("availability").style.color = "#18A558";
     }
     var rating_data = 0;

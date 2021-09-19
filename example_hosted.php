@@ -6,7 +6,7 @@ if(strlen($_SESSION['login'])==0)
     {   
 header('location:login.php');
 }
- else{
+else{
     $query=mysqli_query($con, "select * from users where id='".$_SESSION['id']."'");
     $name='';
     $email='';
@@ -20,8 +20,9 @@ header('location:login.php');
         $name = $row['name'];
         $email = $row['email'];
         $phone = $row['contactno'];
-       
-        // $address = $row['billingAddress']. ' ' .$row['billingState']. ' ' .$row['billingCity']. ' ' .$row['billingPincode'];
+        $address=$row['billingAddress'].",".$row['billingState'].",".$row['billingCity']."-".$row['billingPincode'];
+        $address2=$row['shippingAddress'].",".$row['shippingState'].",".$row['shippingCity']."-".$row['shippingPincode'];
+        
         $order_id = "COD_" . uniqid();
         $currency = "BDT";
         echo "<script>console.log('Debug Objects: " .$name . "' );</script>";
@@ -136,20 +137,22 @@ header('location:login.php');
                     </div>
 
                     <div class="mb-3">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" value="Dhaka">
+                    <label for="address">Billing Address</label>
+                        <input type="text" name="customer_billadd" class="form-control" id="address"
+                            placeholder="1234 Main St" value="<?php echo  $address;?>">
                         <div class="invalid-feedback">
-                            Please enter your shipping address.
+                            Please enter your billing address.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                    <label for="address2">Shipping Address<span class="text-muted">(Optional)</span></label>
+                        <input type="text" name="customer_shipadd" value="<?php echo  $address2;?>" class="form-control"
+                            id="address2" placeholder="Apartment or suite">
                     </div>
 
                     <div class="row">
-                        <div class="col-md-5 mb-3">
+                        <!-- <div class="col-md-5 mb-3">
                             <label for="country">Country</label>
                             <select class="custom-select d-block w-100" id="country">
                                 <option value="">Choose...</option>
@@ -180,7 +183,7 @@ header('location:login.php');
                             <label for="zip">Total Amount</label>
                             <input type="text" value="<?php echo $_SESSION['tp'] ?>" name="amount" id="total_amount">
 
-                        </div>
+                        </div> -->
                     </div>
 
                     <hr class="mb-4">
@@ -188,20 +191,23 @@ header('location:login.php');
                         <input type="checkbox" class="custom-control-input" id="same-address">
                         <input type="hidden" value="<?php echo htmlentities($_SESSION['id']);?>" name="userid"
                             id="userid" />
+                            <input type="hidden" value="<?php echo $_SESSION['tp'] ?>" name="amount" id="total_amount">
 
-                        <label class="custom-control-label" for="same-address">Shipping address is the same as my
+                        <!-- <label class="custom-control-label" for="same-address">Shipping address is the same as my
                             billing
-                            address</label>
+                            address</label> -->
                     </div>
-                    <div class="custom-control custom-checkbox">
+                    <!-- <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="save-info">
                         <label class="custom-control-label" for="save-info">Save this information for next time</label>
-                    </div>
-                    <hr class="mb-4">
+                    </div> -->
+                   
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Pay with SSLCommerz</button>
                 </form>
                 <br>
+                <hr class="mb-4">
                 <br>
+
                 <form name="payment" method="post">
                     <input type="submit" class="btn btn-primary btn-lg btn-block" value="Cash on Delivery"
                         name="cashsubmit">

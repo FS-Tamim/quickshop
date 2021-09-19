@@ -22,8 +22,8 @@ $post_data['tran_id'] = "SSLCZ_TEST_" . uniqid();
 # CUSTOMER INFORMATION
 $post_data['cus_name'] = isset($_POST['customer_name']) ? $_POST['customer_name'] : "John Doe";
 $post_data['cus_email'] = isset($_POST['customer_email']) ? $_POST['customer_email'] : "john.doe@email.com";
-$post_data['cus_add1'] = "Dhaka";
-$post_data['cus_add2'] = "Dhaka";
+$post_data['cus_add1'] = isset($_POST['customer_billadd']) ? $_POST['customer_billadd'] : "Dhaka";
+$post_data['cus_add2'] = isset($_POST['customer_shipadd']) ? $_POST['customer_shipadd'] : "Dhaka";
 $post_data['cus_city'] = "Dhaka";
 $post_data['cus_state'] = "Dhaka";
 $post_data['cus_postcode'] = "1000";

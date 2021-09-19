@@ -224,6 +224,33 @@ $passwordError='<div class="alert alert-danger alert-dismissible fade show" role
     display: flex;
     margin-right:30%;
 }
+.module{
+            backdrop-filter: #303030 !important;
+        }
+         .table,.module-head,th,td{
+            background-color:#303030;
+            color: white;
+        }
+        th:hover{
+            background-color: #383838;
+        }
+        .module-head h3{
+            color: white !important;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .icon-edit{
+            color: green;
+        }
+        .icon-remove-sign{
+            color: red;
+        }
+        .content{
+            background-color: #303030;
+        }
+        .wrapper{
+                margin-top: 5%;
+            }
 </style>
 </head>
 
