@@ -3,24 +3,38 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 $cid=intval($_GET['scid']);
-if(isset($_GET['action']) && $_GET['action']=="add"){
-	$id=intval($_GET['id']);
-	if(isset($_SESSION['cart'][$id])){
-		$_SESSION['cart'][$id]['quantity']++;
-        header('location:my-cart.php');
-	}else{
-		$sql_p="SELECT * FROM products WHERE id={$id}";
-		$query_p=mysqli_query($con,$sql_p);
-		if(mysqli_num_rows($query_p)!=0){
-			$row_p=mysqli_fetch_array($query_p);
-			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productPrice']);
-			header('location:my-cart.php');
-		}else{
-			$message="Product ID is invalid";
-		}
-	}
-}
+// if(isset($_GET['action']) && $_GET['action']=="add"){
+// 	$id=intval($_GET['id']);
+// 	if(isset($_SESSION['cart'][$id])){
+// 		$_SESSION['cart'][$id]['quantity']++;
+//         header('location:my-cart.php');
+// 	}else{
+// 		$sql_p="SELECT * FROM products WHERE id={$id}";
+// 		$query_p=mysqli_query($con,$sql_p);
+// 		if(mysqli_num_rows($query_p)!=0){
+// 			$row_p=mysqli_fetch_array($query_p);
+// 			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productPrice']);
+// 			header('location:my-cart.php');
+// 		}else{
+// 			$message="Product ID is invalid";
+// 		}
+// 	}
+// }
 
+if(isset($_GET['action']) && $_GET['action']=="wishlist" ){
+	if(strlen($_SESSION['login'])==0)
+    {   
+header('location:login.php');
+}
+else
+{
+    $proid=intval($_GET['id']);
+mysqli_query($con,"insert into wishlist(userId,productId) values('".$_SESSION['id']."','$proid')");
+
+header('location:index.php');
+
+}
+}
 
 ?>
 <!DOCTYPE html>
@@ -208,27 +222,8 @@ while ($row=mysqli_fetch_array($ret))
 
                                                     </div><!-- /.product-info -->
                                                     <div class="cart clearfix animate-effect">
-                                                        <div class="action">
-                                                            <!-- <ul class="list-unstyled">
-                                                                
-
-                                                                <li class="add-cart-button btn-group"> -->
-
-                                                                    <a href="sub-category.php?page=product&action=add&id=<?php echo $row['id']; ?>"
-                                                                        class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i>
-                                                                        ADD TO CART</a>
-
-                                                                <!-- </li>
-
-
-
-
-
-
-
-                                                            </ul> -->
-                                                        </div><!-- /.action -->
+                                                    <div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn "><i
+                                                                            class="icon fa fa-heart inner-right-vs"></i> add to wishlist</a></div>
                                                     </div><!-- /.cart -->
                                                 </div>
                                             </div>

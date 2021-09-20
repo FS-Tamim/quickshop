@@ -21,7 +21,7 @@ include('includes/config.php');
 if(isset($_GET['action']) && $_GET['action']=="wishlist" ){
 	if(strlen($_SESSION['login'])==0)
     {   
-header('location:SignupLogin.php');
+header('location:login.php');
 }
 else
 {
@@ -227,7 +227,7 @@ while ($row=mysqli_fetch_array($ret))
 			
 		</div><!-- /.product-info -->
 					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn "><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
+                                                                            class="icon fa fa-heart inner-right-vs"></i> add to wishlist</a></div>
 			</div><!-- /.product -->
       
 			</div><!-- /.products -->
@@ -282,7 +282,7 @@ while ($row=mysqli_fetch_array($ret))
 			
 		</div><!-- /.product-info -->
 					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
+                                                                            class="icon fa fa-heart inner-right-vs"></i> add to wishlist</a></div>
 			</div><!-- /.product -->
       
 			</div><!-- /.products -->
@@ -337,7 +337,7 @@ while ($row=mysqli_fetch_array($ret))
 			
 		</div>
 					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
+                                                                            class="icon fa fa-heart inner-right-vs"></i> add to wishlist</a></div>
 			</div>
       
 			</div>
@@ -394,7 +394,7 @@ while ($row=mysqli_fetch_array($ret))
 			
 		</div>
 					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
+                                                                            class="icon fa fa-heart inner-right-vs"></i> add to wishlist</a></div>
 			</div>
 			</div>
 		</div>
@@ -441,8 +441,8 @@ while ($row=mysqli_fetch_array($ret))
 			
 		</div>
 					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
-			</div>imary
+                                                                            class="icon fa fa-heart inner-right-vs"></i> add to wishlist</a></div>
+			</div>
 			</div>
 		</div>
 <?php }?>
@@ -499,7 +499,7 @@ while ($row=mysqli_fetch_array($ret))
 
 											</div><!-- /.product-price -->
 											<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn "><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i> add to wishlist</a></div>
+                                                                            class="icon fa fa-heart inner-right-vs"></i> add to wishlist</a></div>
 										</div>
 									</div><!-- /.col -->
 								</div><!-- /.product-micro-row -->

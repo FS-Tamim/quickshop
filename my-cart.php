@@ -45,28 +45,19 @@ if(strlen($_SESSION['login'])==0)
 header('location:login.php');
 }
 else{
-$extra="example_hosted.php";
+
 
 
 
 // $host  = $_SERVER['HTTP_HOST'];
 // $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 
-	$quantity=$_POST['quantity'];
-	$pdd=$_SESSION['pid'];
-	$value=array_combine($pdd,$quantity);
-    
-           
-		foreach($value as $qty=> $val34){
-
-    
-
-mysqli_query($con,"insert into orders(userId,productId,quantity) values('".$_SESSION['id']."','$qty','$val34')");
-unset($_SESSION['cart']);
-//header("location:http://$host$uri/$extra?price=".$_SESSION['tp']);
-header("location:example_hosted.php");
-
- }
+$quantity=$_POST['quantity'];
+$pdd=$_SESSION['pid'];
+$value=array_combine($pdd,$quantity);
+$_SESSION['value']=$value;
+       
+header("location:example_hosted.php");	
 }
 }
 

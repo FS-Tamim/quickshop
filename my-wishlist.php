@@ -114,7 +114,7 @@ header('location:my-wishlist.php');
                                 </thead>
                                 <tbody>
                                     <?php
-$ret=mysqli_query($con,"select products.productName as pname,products.productName as proid,products.productImage1 as pimage,products.productPrice as pprice,wishlist.productId as pid,wishlist.id as wid from wishlist join products on products.id=wishlist.productId where wishlist.userId='".$_SESSION['id']."'");
+$ret=mysqli_query($con,"select products.productName as pname,products.productName as proid,products.productImage1 as pimage,products.productPrice as pprice,products.productAvailability as availability,wishlist.productId as pid,wishlist.id as wid from wishlist join products on products.id=wishlist.productId where wishlist.userId='".$_SESSION['id']."'");
 $num=mysqli_num_rows($ret);
 	if($num>0)
 	{
@@ -131,12 +131,16 @@ while ($row=mysqli_fetch_array($ret)) {
                                             <div class="product-name"><a class="productname"
                                                     href="product-details.php?pid=<?php echo htmlentities($pd=$row['pid']);?>"><?php echo htmlentities($row['pname']);?></a>
                                             </div>
-                                            <?php $rt=mysqli_query($con,"select * from productreviews where productId='$pd'");
-$num=mysqli_num_rows($rt);
-{
-?>
+                                            <?php if($row['availability']== "Out of Stock"){?>
+                                            <div class="availability" style="color:#cc0000;">
 
+                                                <?php echo htmlentities($row['availability']);?>
+                                            </div>
+                                            <?php } else{?>
+                                            <div class="availability" style="color:#18A558;">
 
+                                                <?php echo htmlentities($row['availability']);?>
+                                            </div>
                                             <?php } ?>
                                             <div class="price">Tk.
                                                 <?php echo htmlentities($row['pprice']);?>.00
@@ -144,8 +148,23 @@ $num=mysqli_num_rows($rt);
                                             </div>
                                         </td>
                                         <td class="col-md-2">
-                                            <a href="my-wishlist.php?page=product&action=add&id=<?php echo $row['pid']; ?>"
-                                                class="btn-upper btn btn">Add to cart</a>
+                                            <?php if($row['availability']== "Out of Stock"){?>
+                                            <div>
+
+                                                <a class="btn lnk" style="background-color:#B2BEB5;" id="addtocart">Add
+                                                    to cart</a>
+                                            </div>
+                                            <?php } else{?>
+
+                                            <div>
+
+                                                <a id="addtocart"
+                                                    href="my-wishlist.php?page=product&action=add&id=<?php echo $row['pid']; ?>"
+                                                    class="btn lnk" style="background-color:#db3d52;" id="addtocart">Add
+                                                    to cart</a>
+                                            </div>
+                                            <?php } ?>
+
                                         </td>
                                         <td class="col-md-2 close-btn">
                                             <a href="my-wishlist.php?del=<?php echo htmlentities($row['wid']);?>"

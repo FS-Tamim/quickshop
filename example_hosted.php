@@ -66,6 +66,10 @@ else{
         -ms-user-select: none;
         user-select: none;
     }
+    footer{
+        background-color: #282828 !important;
+        width: 100%;
+    }
 
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {
@@ -76,11 +80,14 @@ else{
 </head>
 
 <body class="bg-light">
+    
+<header>
+<?php include('includes/top-header.php');?>
+</header>
     <div class="container">
         <div class="py-5 text-center">
-            <h2>Hosted Payment - SSLCommerz</h2>
-            <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. We have provided
-                this sample form for understanding Hosted Checkout Payment with SSLCommerz.</p>
+            <h2>Payment</h2>
+            
         </div>
 
         <div class="row">
@@ -215,14 +222,10 @@ else{
             </div>
         </div>
 
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">&copy; 2019 Company Name</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Privacy</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Support</a></li>
-            </ul>
-        </footer>
+        
+<footer>
+<?php include('includes/footer.php');?>
+</footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

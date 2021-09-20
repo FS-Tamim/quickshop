@@ -3,23 +3,24 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 $cid=intval($_GET['cid']);
-if(isset($_GET['action']) && $_GET['action']=="add"){
-	$id=intval($_GET['id']);
-	if(isset($_SESSION['cart'][$id])){
-		$_SESSION['cart'][$id]['quantity']++;
-		header('location:my-cart.php');
-	}else{
-		$sql_p="SELECT * FROM products WHERE id={$id}";
-		$query_p=mysqli_query($con,$sql_p);
-		if(mysqli_num_rows($query_p)!=0){
-			$row_p=mysqli_fetch_array($query_p);
-			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productPrice']);
-			header('location:my-cart.php');
-		}else{
-			$message="Product ID is invalid";
-		}
-	}
-}
+// if(isset($_GET['action']) && $_GET['action']=="add"){
+// 	$id=intval($_GET['id']);
+// 	if(isset($_SESSION['cart'][$id])){
+// 		$_SESSION['cart'][$id]['quantity']++;
+// 		header('location:my-cart.php');
+// 	}else{
+// 		$sql_p="SELECT * FROM products WHERE id={$id}";
+// 		$query_p=mysqli_query($con,$sql_p);
+// 		if(mysqli_num_rows($query_p)!=0){
+// 			$row_p=mysqli_fetch_array($query_p);
+// 			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productPrice']);
+// 			header('location:my-cart.php');
+// 		}else{
+// 			$message="Product ID is invalid";
+// 		}
+// 	}
+// }
+
 
 
 
@@ -242,14 +243,8 @@ while ($row=mysqli_fetch_array($ret))
                                                             <div class="list-unstyled row">
                                                                 
 
-                                                                <div class="add-cart-button col-md-8 col-sm-12">
-
-                                                                    <a href="category.php?page=product&action=add&id=<?php echo $row['id']; ?>"
-                                                                        class="btn"><i
-                                                                            class="fa fa-shopping-cart inner-right-vs"></i>
-                                                                        ADD TO CART</a>
-
-</div>
+                                                            <div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn "><i
+                                                                            class="icon fa fa-heart inner-right-vs"></i> add to wishlist</a></div>
 
 
 
