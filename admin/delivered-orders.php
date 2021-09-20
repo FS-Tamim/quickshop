@@ -37,7 +37,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 
 </script>
 
-	  <style>
+<style>
         .module{
             backdrop-filter: #303030 !important;
         }

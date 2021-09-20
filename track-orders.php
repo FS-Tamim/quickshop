@@ -82,11 +82,12 @@ include('includes/config.php');
 			<div class="row">
 				<div class="col-md-12">
 	<h2>Track your Order</h2>
-	<span class="title-tag inner-top-vs">Please enter your Order ID in the box below and press Enter. This was given to you on your receipt and in the confirmation email you should have received. </span>
+	<span class="title-tag inner-top-vs">Please enter your Transaction ID in the box below and press
+                            Enter. This was given to you on your receipt. </span>
 	<form class="register-form outer-top-xs" role="form" method="post" action="order-details.php">
 		<div class="form-group">
-		    <label class="info-title" for="exampleOrderId1">Order ID</label>
-		    <input type="text" class="form-control unicase-form-control text-input" name="orderid" id="exampleOrderId1" >
+		    <label class="info-title" for="exampleOrderId1">Transaction ID</label>
+		    <input type="text" class="form-control unicase-form-control text-input" name="transid" id="exampleOrderId1" >
 		</div>
 	  	<div class="form-group">
 		    <label class="info-title" for="exampleBillingEmail1">Registered Email</label>

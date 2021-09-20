@@ -76,7 +76,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 					<th class="cart-sub-total item">Shipping Charge</th>
 					<th class="cart-total item">Grandtotal</th>
 					<th class="cart-total item">Payment Method</th>
-					<th class="cart-status item">Status</th>
+					<th class="cart-status item">Transaction Id</th>
 					<th class="cart-description item">Order Date</th>
 					<th class="cart-total last-item">Action</th>
 				</tr>
@@ -84,7 +84,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 			
 			<tbody>
 
-<?php $query=mysqli_query($con,"select products.productImage1 as pimg1,products.productName as pname,products.id as proid,orders.productId as opid,orders.quantity as qty,products.productPrice as pprice,products.shippingCharge as shippingcharge,orders.paymentMethod as paym,orders.status as status,orders.orderDate as odate,orders.id as orderid from orders join products on orders.productId=products.id where orders.userId='".$_SESSION['id']."' and orders.paymentMethod is not null");
+<?php $query=mysqli_query($con,"select products.productImage1 as pimg1,products.productName as pname,products.id as proid,orders.productId as opid,orders.quantity as qty,products.productPrice as pprice,products.shippingCharge as shippingcharge,orders.paymentMethod as paym,orders.transaction_id as transid,orders.orderDate as odate,orders.id as orderid from orders join products on orders.productId=products.id where orders.userId='".$_SESSION['id']."' and orders.paymentMethod is not null");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
@@ -109,7 +109,7 @@ while($row=mysqli_fetch_array($query))
 					<td class="cart-product-sub-total"><?php echo $shippcharge=$row['shippingcharge']; ?>  </td>
 					<td class="cart-product-grand-total"><?php echo (($qty*$price)+$shippcharge);?></td>
 					<td class="cart-product-sub-total"><?php echo $row['paym']; ?>  </td>
-					<td class="cart-product-sub-total"><?php echo $row['status']; ?> </td>
+					<td class="cart-product-sub-total"><?php echo $row['transid']; ?> </td>
 					<td class="cart-product-sub-total"><?php echo $row['odate']; ?>  </td>
 					
 					<td  >

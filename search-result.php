@@ -245,7 +245,7 @@ while ($row=mysqli_fetch_array($ret))
 		</div><!-- /.product-info -->
 					<div class="cart clearfix animate-effect">
 					<div class="action"><a href="index.php?page=product&action=wishlist&id=<?php echo $row['id']; ?>" class="btn "><i
-                                                                            class="icon fa fa-heart inner-right-vs"></i> add to wishlist</a></div>
+                                                                            class="icon fa fa-heart inner-right-vs"></i> Add to wishlist</a></div>
 			</div><!-- /.cart -->
 			</div>
 			</div>

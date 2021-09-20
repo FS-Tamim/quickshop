@@ -76,10 +76,26 @@ else{
             font-size: 3.5rem;
         }
     }
+    .btn{
+    background-color: #FFD300 !important;
+    font-weight: bold !important;
+    color: #181818;
+}
+.btn:hover{
+    background-color: #ffdb4d;
+}
+.or{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+.form_container{
+
+}
     </style>
 </head>
 
-<body class="bg-light">
+<body >
     
 <header>
 <?php include('includes/top-header.php');?>
@@ -90,23 +106,8 @@ else{
             
         </div>
 
-        <div class="row">
-            <div class="col-md-4 order-md-2 mb-4">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Your cart</span>
-                    <span class="badge badge-secondary badge-pill">3</span>
-                </h4>
-                <ul class="list-group mb-3">
-
-
-
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (BDT)</span>
-                        <strong><?php echo htmlentities($_SESSION['tp']);?></strong>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-8 order-md-1">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8 form_container">
                 <h4 class="mb-3">Billing address</h4>
                 <form action="checkout_hosted.php" method="POST" class="needs-validation">
                     <div class="row">
@@ -135,7 +136,7 @@ else{
                     </div>
 
                     <div class="mb-3">
-                        <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                        <label for="email">Email <span class="text-muted"></span></label>
                         <input type="email" name="customer_email" class="form-control" id="email"
                             placeholder="you@example.com" value="<?php echo htmlentities($email);?>">
                         <div class="invalid-feedback">
@@ -158,40 +159,7 @@ else{
                             id="address2" placeholder="Apartment or suite">
                     </div>
 
-                    <div class="row">
-                        <!-- <div class="col-md-5 mb-3">
-                            <label for="country">Country</label>
-                            <select class="custom-select d-block w-100" id="country">
-                                <option value="">Choose...</option>
-                                <option value="Bangladesh">Bangladesh</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid country.
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="state">State</label>
-                            <select class="custom-select d-block w-100" id="state">
-                                <option value="">Choose...</option>
-                                <option value="Dhaka">Dhaka</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please provide a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="zip">Zip</label>
-                            <input type="text" class="form-control" id="zip" placeholder="">
-                            <div class="invalid-feedback">
-                                Zip code required.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="zip">Total Amount</label>
-                            <input type="text" value="<?php echo $_SESSION['tp'] ?>" name="amount" id="total_amount">
-
-                        </div> -->
-                    </div>
+                   
 
                     <hr class="mb-4">
                     <div class="custom-control custom-checkbox">
@@ -209,23 +177,21 @@ else{
                         <label class="custom-control-label" for="save-info">Save this information for next time</label>
                     </div> -->
                    
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Pay with SSLCommerz</button>
+                    <button class="btn  btn-lg btn-block" type="submit">Pay with SSLCommerz</button>
                 </form>
                 <br>
+                <div class="or"> or</div>
                 <hr class="mb-4">
                 <br>
 
                 <form name="payment" method="post">
-                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Cash on Delivery"
+                    <input type="submit" class="btn  btn-lg btn-block" value="Cash on Delivery"
                         name="cashsubmit">
                 </form>
             </div>
         </div>
 
-        
-<footer>
-<?php include('includes/footer.php');?>
-</footer>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -238,4 +204,8 @@ else{
     </script>
 
 </html>
+        
+<footer>
+<?php include('includes/footer.php');?>
+</footer>
 <?php } ?>

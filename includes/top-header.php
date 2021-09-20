@@ -159,6 +159,10 @@ else{
 		  <a class="nav-link" href="my-wishlist.php"><i class="fas fa-heart"></i> Wishlist</a> 
 	  </li> 
 	  
+                  
+
+                 
+	  
 
 	  <?php 
                     if(strlen($_SESSION['login'])==0)
@@ -167,8 +171,14 @@ else{
                     <li><a class="nav-link" href="admin/change_password.php"><i class="icon fa fa-user"></i>
                             <?php echo htmlentities( $_SESSION['adminname']);?></a></li>
                     <li><a class="nav-link" href="admin/adminlogout.php"><i class="icon fa fa-sign-out"></i>Logout</a></li>
-                    <?php   } else{?>
-						<li class="nav-item dropdown"> 
+                    <?php   } else if(strlen($_SESSION['slogin'])!==0){
+                                      
+									  ?><li><a class="nav-link shopname" href="seller-account.php"><i class="icon fa fa-user"></i>
+									   <?php echo htmlentities($_SESSION['shopname']);?></a></li>
+							   <li><a class="nav-link" href="seller/sellerlogout.php"><i class="icon fa fa-sign-out"></i>Logout</a>
+							   </li>
+							   <?php } else{?>
+								<li class="nav-item dropdown"> 
 	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	  <i class="fas fa-user"></i> account
 		</a>
@@ -183,8 +193,9 @@ else{
          
         </div>
 	  </li> 
-                    <?php }}
-else{ ?>
+							   <?php }} else{
+									   ?>
+				
                     <li><a class="nav-link" href="my-account.php"><i class="icon fa fa-user"></i>
                             <?php echo htmlentities($_SESSION['username']);?></a></li>
                     <li><a class="nav-link" href="logout.php"><i class="icon fa fa-sign-out"></i>Logout</a></li>

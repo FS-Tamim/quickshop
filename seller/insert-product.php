@@ -106,6 +106,29 @@ $_SESSION['msg']="Product Inserted Successfully !!";
             .wrapper{
                 margin-top: 5%;
             }
+            .btn-file {
+        position: relative;
+        overflow: hidden;
+        background-color: silver !important;
+        color: black !important;
+    }
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
 
     
        
@@ -212,8 +235,10 @@ $_SESSION['msg']="Product Inserted Successfully !!";
                                     </div>
                                     <div class="control-group"><label class="control-label" for="basicinput">Product
                                             Image1</label>
-                                        <div class="controls"><input type="file" name="productimage1" id="productimage1"
-                                                value="" class="span8 tip" required></div>
+                                        <div class="controls"><span class="btn btn-primary btn-file">
+                                                Browse...<input type="file" name="productimage1" id="productimage1"
+                                                    value="" class="span8 tip" required>
+                                            </span></div>
                                     </div>
                                     <div class="control-group">
                                         <div class="controls"><button type="submit" name="submit"

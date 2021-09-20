@@ -6,7 +6,7 @@ if(isset($_POST['submit'])){
 
 if(!empty($_POST['email']) && !empty($_POST['password']))
 {
-echo "bal";
+
 $email=$_POST['email'];
 $password=md5($_POST['password']);
 $query=mysqli_query($con,"SELECT * FROM users WHERE email='$email' and password='$password'");

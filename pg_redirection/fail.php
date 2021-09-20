@@ -12,6 +12,16 @@
     <title>Transaction Failed - SSLCommerz</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <style>
+            .btn{
+    background-color: #FFD300;
+    font-weight: bold !important;
+    color: #181818;
+}
+.btn:hover{
+    background-color: #ffdb4d;
+}
+        </style>
 </head>
 
 <body>
@@ -104,8 +114,9 @@
                 <?php else : ?>
                 <h2 class="text-center text-danger">Invalid Information.</h2>
                 <?php endif ?>
+                <a href="../order-history.php" class="btn  btn-lg btn-block">Continue Shopping</></a>
             </div>
-            <a href="../order-history.php" class="btn btn-primary btn-lg btn-block">Continue Shopping</></a>
+            
         </div>
     </div>
 </body>

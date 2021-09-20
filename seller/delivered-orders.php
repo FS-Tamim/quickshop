@@ -16,15 +16,18 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Portal</title>
     <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
 
 
     <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
         rel='stylesheet'>
+
+
     <script language="javascript" type="text/javascript">
     var popUpWin = 0;
 
@@ -160,7 +163,6 @@ while($row=mysqli_fetch_array($query))
         <!--/.container-->
     </div>
     <!--/.wrapper-->
-
     <script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

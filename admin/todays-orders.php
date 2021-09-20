@@ -35,14 +35,17 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 }
 
 </script>
-
-	 <style>
+<style>
         .module{
             backdrop-filter: #303030 !important;
         }
+		.module-head{
+			width: 100% !important;
+		}
          .table,.module-head,th,td{
             background-color:#303030;
             color: white;
+			
         }
         th:hover{
             background-color: #383838;
@@ -51,6 +54,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
             color: white !important;
             font-weight: bold;
             font-size: 30px;
+			padding: 3%;
         }
         .icon-edit{
             color: green;
@@ -62,7 +66,6 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
             background-color: #303030;
         }
     </style>
-
 </head>
 <body>
 <?php include('include/header.php');?>

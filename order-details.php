@@ -19,7 +19,6 @@ include('includes/config.php');
 	    <title>Order History</title>
 	    
 
-		\
 
 	<script language="javascript" type="text/javascript">
 var popUpWin=0;
@@ -60,7 +59,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 			
 					<th class="cart-qty item">Quantity</th>
 					<th class="cart-sub-total item">Price Per unit</th>
-					<th class="cart-total item">Grandtotal</th>
+					<th class="cart-total item">Total</th>
 					<th class="cart-total item">Payment Method</th>
 					<th class="cart-description item">Order Date</th>
 					<th class="cart-total last-item">Action</th>
@@ -69,13 +68,17 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 			
 			<tbody>
 <?php 
-$orderid=$_POST['orderid'];
+$transid=$_POST['transid'];
 $email=$_POST['email'];
-$ret = mysqli_query($con,"select t.email,t.id from (select usr.email,odrs.id from users as usr join orders as odrs on usr.id=odrs.userId) as t where  t.email='$email' and (t.id='$orderid')");
+echo "<script>console.log('Debug Objects:pid " .$transid . "' );</script>";
+echo "<script>console.log('Debug Objects:pid " .$email . "' );</script>";
+//  $ret = mysqli_query($con,"select t.email,t.transaction_id from (select usr.email,odrs.id from users as usr join orders as odrs on usr.id=odrs.userId) as t where  t.email='$email' and (t.transaction_id='$transid')");
+$ret = mysqli_query($con,"select users.id as userid,users.email as email,orders.transaction_id as transid from orders join users on orders.userId=users.id where orders.transaction_id='$transid' and orders.email='$email'");
 $num=mysqli_num_rows($ret);
+echo "<script>console.log('Debug Objects:pid " .$num. "' );</script>";
 if($num>0)
 {
-$query=mysqli_query($con,"select products.id as proid, products.productImage1 as pimg1,products.productName as pname,orders.productId as opid,orders.quantity as qty,products.productPrice as pprice,orders.paymentMethod as paym,orders.orderDate as odate,orders.id as orderid from orders join products on orders.productId=products.id where orders.id='$orderid' and orders.paymentMethod is not null");
+$query=mysqli_query($con,"select products.id as proid,products.productImage1 as pimg1,products.productName as pname,products.shippingCharge as shippingcharge,orders.productId as opid,orders.quantity as qty,products.productPrice as pprice,orders.paymentMethod as paym,orders.orderDate as odate,orders.id as orderid from orders join products on orders.productId=products.id where orders.transaction_id='$transid' and orders.paymentMethod is not null");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
@@ -94,12 +97,17 @@ while($row=mysqli_fetch_array($query))
 						
 					</td>
 					<td class="cart-product-quantity">
-						<?php echo $qty=$row['qty']; ?>   
-		            </td>
-					<td class="cart-product-sub-total"><?php echo $price=$row['pprice']; ?>  </td>
-					<td class="cart-product-grand-total"><?php echo $qty*$price;?></td>
-					<td class="cart-product-sub-total"><?php echo $row['paym']; ?>  </td>
-					<td class="cart-product-sub-total"><?php echo $row['odate']; ?>  </td>
+                                                <?php echo $qty=$row['qty']; ?>
+                                            </td>
+                                            <td class="cart-product-sub-total"><?php echo $price=$row['pprice']; ?>
+                                            </td>
+
+                                            <?php  $shippcharge=$row['shippingcharge']; ?>
+                                            <td class="cart-product-grand-total">
+                                                <?php echo (($qty*$price)+$shippcharge);?></td>
+                                            <td class="cart-product-sub-total"><?php echo $row['paym']; ?> </td>
+
+                                            <td class="cart-product-sub-total"><?php echo $row['odate']; ?> </td>
 					
 					<td>
  <a href="javascript:void(0);" onClick="popUpWindow('track-order.php?oid=<?php echo htmlentities($row['orderid']);?>');" title="Track order">

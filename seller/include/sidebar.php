@@ -11,7 +11,7 @@
 	 
 	margin-right: 10px;
 	 
-	color: orange;
+	color: orange !important;
 }
 .widget-menu>li>a {
 	background-color: #181818;
@@ -105,7 +105,7 @@ $num1 = mysqli_num_rows($rt);
 
         </ul>
         <ul class="widget widget-menu unstyled">
-        <li><a class="title" class="title"href="seller-account.php"><i class="menu-icon icon-tasks"></i> My account </a></li>
+        
          
             <li>
                 <a class="title" href="sellerlogout.php" class="title"href="logout.php">
@@ -118,3 +118,5 @@ $num1 = mysqli_num_rows($rt);
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/c6b0374cee.js"></script>
+<script src="https://kit.fontawesome.com/6ad32c1b9a.js" crossorigin="anonymous"></script>

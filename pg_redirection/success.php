@@ -11,6 +11,18 @@ ini_set('display_errors', 0);
     <title>Successful Transaction - SSLCommerz</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <style>
+            .btn{
+    background-color: #FFD300;
+    font-weight: bold !important;
+    color: #181818;
+    /* margin-left: 20% ; */
+    margin-right: 30% ;
+}
+.btn:hover{
+    background-color: #ffdb4d;
+}
+        </style>
 </head>
 
 <body>
@@ -96,9 +108,10 @@ ini_set('display_errors', 0);
 
                 } // status is 'Pending' or already 'Processing'
                 ?>
-
+                <a href="../order-history.php" class="btn  btn-lg btn-block">Continue Shopping</></a>
             </div>
-            <a href="../order-history.php" class="btn btn-primary btn-lg btn-block">Continue Shopping</></a>
+            
         </div>
+      
     </div>
 </body>

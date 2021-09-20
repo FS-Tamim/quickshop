@@ -21,6 +21,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
     <title>Seller Portal</title>
     <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
 
 
     <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
@@ -163,7 +164,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
     <script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="scripts/flot/jquery.flot.js" type="text/javascript"></script>
-
+   
 </body>
 <footer>
     <?php include('include/footer.php');?>
