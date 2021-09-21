@@ -44,7 +44,7 @@ include('../includes/config.php');
 
                         <div class="module">
                             <div class="module-head">
-                                <h3>Manage Users</h3>
+                                <h3>User log</h3>
                             </div>
                             <div class="module-body table">
 

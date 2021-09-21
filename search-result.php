@@ -2,7 +2,20 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-$find="%{$_POST['product']}%";
+$str="%{$_POST['product']}";
+$find="";
+$chars = str_split($str);
+$b='%';
+foreach ($chars as $char) {
+    $find.= $char.$b;
+    
+   
+    echo "<script>console.log('Debug Objects:f " .$find . "' );</script>";
+    // echo "<script>console.log('Debug Objects:c " .$char . "' );</script>";
+    
+}
+echo "<script>console.log('Debug Objects:str " .$str . "' );</script>";
+echo "<script>console.log('Debug Objects:find " .$find . "' );</script>";
 if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
 	if(isset($_SESSION['cart'][$id])){
@@ -231,7 +244,7 @@ while ($row=mysqli_fetch_array($ret))
 			
 		
 		<div class="product-info text-left">
-			<h3 class="name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['productName']);?></a></h3>
+			<h6 class="name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['productName']);?></a></h6>
 			<div class="rating rateit-small"></div>
 			<div class="description"></div>
 
@@ -252,7 +265,7 @@ while ($row=mysqli_fetch_array($ret))
 		</div>
 	  <?php } } else {?>
 	
-		<div class="col-sm-6 col-md-4 wow fadeInUp"> <h3>No Product Found</h3>
+		<div class="col-sm-6 col-md-4 wow fadeInUp"> <h6>No Product Found</h6>
 		</div>
 		
 <?php } ?>	

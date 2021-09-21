@@ -10,18 +10,22 @@ include('includes/config.php');
 <?php
 if(isset($_POST['change']))
 {
-
     if(isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['c_password']) && !empty($_POST['c_password'])){
         if(strlen($_POST['password'])>=6){
             if($_POST['password']==$_POST['c_password']){
                 $password=md5($_POST['password']);
                 $email=$_POST['email'];
-                $contact=$_POST['contact'];
+               
+                    $contact=$_POST['contactno'];
                 
+                echo "<script>console.log('Debug Objects: pass" .$password . "' );</script>";
+                echo "<script>console.log('Debug Objects: email" .$email . "' );</script>";
+                echo "<script>console.log('Debug Objects: contact" .$contact . "' );</script>";
             $query=mysqli_query($con,"SELECT * FROM users WHERE email='$email' and contactno='$contact'");
             $num=mysqli_fetch_array($query);
+            echo "<script>console.log('Debug Objects: seller" .$num . "' );</script>";
             if($num>0)
-            {
+            {  echo "<script>console.log('Debug Objects: user" .$num . "' );</script>";
             $extra="forgot-password.php";
             mysqli_query($con,"update users set password='$password' WHERE email='$email' and contactno='$contact' ");
             $host=$_SERVER['HTTP_HOST'];
@@ -29,7 +33,6 @@ if(isset($_POST['change']))
             header("location:http://$host$uri/$extra");
             $_SESSION['errmsg']='<div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Password changed successfully</strong>
-            
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -38,50 +41,84 @@ if(isset($_POST['change']))
             }
             else
             {
-            $extra="forgot-password.php";
+                $query=mysqli_query($con,"SELECT * FROM admin WHERE email='$email'");
+                   $num=mysqli_fetch_array($query);
+                   echo "<script>console.log('Debug Objects: admin" .$num . "' );</script>";
+                   if($num>0)
+                    {  echo "<script>console.log('Debug Objects: admin" .$num . "' );</script>";
+                        $extra="forgot-password.php";
+                        mysqli_query($con,"update admin set password='$password' WHERE email='$email'");
+                        $host=$_SERVER['HTTP_HOST'];
+                        $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+                        header("location:http://$host$uri/$extra");
+                        $_SESSION['errmsg']='<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Password changed successfully</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>';
+                        exit();
+
+            
+            }
+            else{
+                $query=mysqli_query($con,"SELECT * FROM sellers WHERE email='$email' and contactno='$contact'");
+                   $num=mysqli_fetch_array($query);
+                   echo "<script>console.log('Debug Objects: seller" .$num . "' );</script>";
+                   if($num>0)
+                    {   echo "<script>console.log('Debug Objects: seller" .$num . "' );</script>";
+                        $extra="forgot-password.php";
+                        mysqli_query($con,"update sellers set password='$password' WHERE email='$email' and contactno='$contact'");
+                        $host=$_SERVER['HTTP_HOST'];
+                        $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+                        header("location:http://$host$uri/$extra");
+                        $_SESSION['errmsg']='<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Password changed successfully</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>';
+                        exit();
+                
+            }
+            else{
+                $extra="forgot-password.php";
             $host  = $_SERVER['HTTP_HOST'];
             $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             header("location:http://$host$uri/$extra");
             $_SESSION['errmsg']='<div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Invalid Email or Contact no</strong>
-            
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
             </div>';
             exit();
             }
-
             }
-
+        }
+    }
             else{
 $cpasswordError='<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong>The password does not match with confirm password</strong>
-
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button>
 </div>';
             }
-
         }
-
 
         else{
             $passwordError='<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong>The password should consist of 6 characters</strong>
-
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button>
 </div>';
-
         }
     }
     else{
 $passwordError='<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong>Please fill the password field</strong>
-
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button>
@@ -89,7 +126,6 @@ $passwordError='<div class="alert alert-danger alert-dismissible fade show" role
     }
 
 
-  
 }
 ?>
 <style>

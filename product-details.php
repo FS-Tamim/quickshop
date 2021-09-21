@@ -1,8 +1,6 @@
 <?php 
 session_start();
 error_reporting(0);
-
-
 include('includes/config.php');
 if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
@@ -34,7 +32,7 @@ header('location:my-wishlist.php');
 
 }
 }
-$btnability=1;
+$btnability=1; // not verified for review
 
 $opids = array();
 
@@ -44,9 +42,7 @@ $query=mysqli_query($con,"select orders.productId as opid,orders.orderDate as od
     
     while($row=mysqli_fetch_array($query)) {
         array_push($opids,$row['opid']);
-        // $opid=$row['opid'];
         
-
 }
 echo "<script>console.log('Debug Objects:pid " .$pid . "' );</script>";
 echo "<script>console.log('Debug Objects:opid " .$opid . "' );</script>";
@@ -68,15 +64,8 @@ if(isset($_POST["rating_data"]))
     $user_name=$_POST['user_name'];
 	$user_rating=$_POST['rating_data'];
 	$user_review=$_POST['user_review'];
-   
-   
-       
-       $review=mysqli_query($con,"insert into review_table (productId,userId, user_rating, user_review) values('$pid','$userid','$user_rating','$user_review')"); 
-
-    
+    $review=mysqli_query($con,"insert into review_table (productId,userId, user_rating, user_review) values('$pid','$userid','$user_rating','$user_review')"); 
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,12 +74,8 @@ if(isset($_POST["rating_data"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Portal Home Page</title>
-    <!-- Bootstrap Core CSS -->
-
-
-    <!-- Customizable CSS -->
+    
     <style>
-     
      .cart_btn{
         margin-left: 15%;
         margin-top: 5%;
@@ -132,21 +117,7 @@ if(isset($_POST["rating_data"]))
         color: #aaaaaa;
     }
 
-    /* .single-product .product-info .stock-container .stock-box .label {
-        font-size: 16px;
-        font-family: 'FjallaOneRegular';
-        line-height: 18px;
-        text-transform: uppercase;
-        color: #666666;
-        padding: 0px;
-        font-weight: normal;
-    } */
-
-    /* .single-product .product-info .stock-container .stock-box .value {
-        font-size: 14px;
-        color: #ff7878;
-    } */
-
+  
     .single-product .product-info .description-container {
         line-height: 20px;
         color: #666666;
@@ -531,21 +502,6 @@ if(isset($_POST["rating_data"]))
         text-align: center;
         width: 60px;
     }
-
-    /* .cnt-homepage .single-product .product-info-block .stock-container .stock-box .label {
-        color: #434343;
-        font-family: 'Roboto';
-        font-size: 13px;
-        font-weight: normal;
-        line-height: 20px;
-        padding: 0;
-        text-transform: none;
-    } */
-
-    /* .cnt-homepage .single-product .product-info-block .stock-container .stock-box .value {
-        font-size: 13px;
-    } */
-
     .cnt-homepage .single-product .product-tabs .nav-tab-cell-detail li {
         margin-right: 10px;
         padding: 0;
@@ -603,14 +559,7 @@ if(isset($_POST["rating_data"]))
     .name {
         font-weight: bold;
     }
-    .btn{
-    background-color: #FFD300;
-    font-weight: bold !important;
-    color: #181818;
-}
-.btn:hover{
-    background-color: #ffdb4d;
-}
+
 .control-group{
     margin-bottom: 1.5% !important;
 }
@@ -619,7 +568,7 @@ if(isset($_POST["rating_data"]))
     color:black;
 }
 .btn{
-    background-color: #FFD300 !important;
+    background-color: #FFD300 ;
     font-weight: bold !important;
     color: #181818;
 }
@@ -627,16 +576,7 @@ if(isset($_POST["rating_data"]))
     background-color: #ffdb4d;
 }
     </style>
-
-
-
-    <!-- Demo Purpose Only. Should be removed in production -->
-
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
-
-
-
-
 
 </head>
 
@@ -644,9 +584,6 @@ if(isset($_POST["rating_data"]))
     <header>
         <?php include('includes/top-header.php');?>
     </header>
-
-
-
 
     <div class="body-content outer-top-xs">
         <div class='container'>
@@ -706,10 +643,10 @@ if(isset($_POST["rating_data"]))
                                         <div class="col-sm-5">
                                             <div class="stock-box">
                                                 <span
-                                                    class="available" id="availability"><?php echo htmlentities($row['productAvailability']);?></span>
+                                                class="value" id="availability"><?php echo htmlentities($row['productAvailability']);?></span>
                                             </div>
                                         </div>
-                                    </div><!-- /.row -->
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-7">
                                             <div class="stock-box">
@@ -718,8 +655,7 @@ if(isset($_POST["rating_data"]))
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="stock-box">
-                                                <span class="value"
-                                                    id="availability"><?php echo htmlentities($row['merchant']);?></span>
+                                                <span><?php echo htmlentities($row['merchant']);?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -737,7 +673,7 @@ if(isset($_POST["rating_data"]))
                                                     class="value"><?php echo htmlentities($row['productCompany']);?></span>
                                             </div>
                                         </div>
-                                    </div><!-- /.row -->
+                                    </div>
                                 </div>
                                 <div class="stock-container info-container m-t-10">
                                     <div class="row">
@@ -760,7 +696,7 @@ if(isset($_POST["rating_data"]))
 											?></span>
                                             </div>
                                         </div>
-                                    </div><!-- /.row -->
+                                    </div>
                                 </div>
 
                                 <div class="price-container info-container m-t-20">
@@ -782,8 +718,8 @@ if(isset($_POST["rating_data"]))
                                             </div>
                                         </div>
 
-                                    </div><!-- /.row -->
-                                </div><!-- /.price-container -->
+                                    </div>
+                                </div>
                                 <div class="quantity-container info-container">
                                     <div class="row">
                                         <div class="col-sm-2">
@@ -791,13 +727,6 @@ if(isset($_POST["rating_data"]))
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="cart-quantity">
-                                                <!-- <div class="quant-input">
-                                                    <div class="arrows">
-                                                        <div class="arrow plus gradient"><span class="ir"><i
-                                                                    class="icon fa fa-sort-asc"></i></span></div>
-                                                        <div class="arrow minus gradient"><span class="ir"><i
-                                                                    class="icon fa fa-sort-desc"></i></span></div>
-                                                    </div> -->
                                                     <input type="text" value="1" disabled>
                                                 </div>
                                             </div>
@@ -805,26 +734,15 @@ if(isset($_POST["rating_data"]))
 
                                         <div class="col-sm-8 cart_btn">
                                             <a href="product-details.php?page=product&action=add&id=<?php echo $row['id']; ?>"
-                                                class=" btn" id="addtocart"><i class="fa fa-shopping-cart"></i> ADD
+                                                class="btn" id="addtocart"><i class="fa fa-shopping-cart"></i> ADD
                                                 TO CART</a>
                                         </div>
                                        
-                                    </div><!-- /.row -->
-                                </div><!-- /.quantity-container -->
-
-
-                                
-                  
-
-
-
-
-
-                            </div><!-- /.product-info -->
-                        </div><!-- /.col-sm-7 -->
-                    </div><!-- /.row -->
-
-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="description ">
                         <div class="row"> 
                             <div class=" title col-md-4 col-sm-3">
@@ -832,22 +750,16 @@ if(isset($_POST["rating_data"]))
                             </div>
                             <div class="details col-sm-9 col-md-8">
 
-                                
-
-                                    
                                         <div >
                                             <p class="text"><?php echo $row['productDescription'];?></p>
                                         </div>
                                     
 
 
-                            </div><!-- /.col -->
-                        </div><!-- /.row -->
-                    </div><!-- /.product-tabs -->
-
-
-                </div><!-- /.col -->
-
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
            
         </div>
@@ -858,7 +770,6 @@ if(isset($_POST["rating_data"]))
                 <div class="card-header font-weight-bold"><?php echo $row['productName'];?></div>
                 <?php
             }
-    // $query=mysqli_query($con,"SELECT * FROM review_table ORDER BY review_id DESC WHERE id={$pid}");
 
 $query = mysqli_query($con,"SELECT AVG(user_rating) as AVGRATE from review_table WHERE productId={$pid}");
 $row = mysqli_fetch_array($query);
@@ -887,13 +798,9 @@ $twoStar=$row['twoStar'];
 $query = mysqli_query($con,"SELECT count(review_id) as oneStar from  review_table where productId={$pid} and user_rating=1");
 $row = mysqli_fetch_array($query);
 $oneStar=$row['oneStar'];
-// $query = mysqli_query($conn,"SELECT count(remark) as Totalreview from  rating_data where status=1");
-// $row = mysqli_fetch_array($query);
-// $Total_review=$row['Totalreview'];
-// $review = mysqli_query($con,"SELECT user_rating,user_review,review_posting_time from review_table where productId={$pid} order by review_posting_time desc limit 10");
+
 $review = mysqli_query($con,"select users.name as username,review_table.user_rating as user_rating ,review_table.user_review as user_review,review_table.review_posting_time as review_posting_time from users join review_table on users.id=review_table.userId where review_table.productId={$pid} order by review_posting_time desc limit 10");
-// $rating = mysqli_query($conn,"SELECT count(*) as Total,rating from rating_data group by rating order by rating desc");
-echo $AVGRATE;
+
     
    
                 ?><div class="card-body">
@@ -922,7 +829,7 @@ echo $AVGRATE;
 
                             <div class="progress-label-right">(<span id="total_five_star_review"><?=$fiveStar;?></span>)
                             </div>
-                            <div class="progress">
+                            <div class="progress bg-warning" style="width:100%">
                                 <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
                                     aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
                             </div>
@@ -932,7 +839,7 @@ echo $AVGRATE;
 
                             <div class="progress-label-right">(<span id="total_four_star_review"><?=$fourStar;?></span>)
                             </div>
-                            <div class="progress w3-light-grey" style="width:80%">
+                            <div class="progress bg-warning" style="width:80%">
                                 <div class="progress-bar bg-warning w3-red" role="progressbar" aria-valuenow="0"
                                     aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
                             </div>
@@ -943,7 +850,7 @@ echo $AVGRATE;
                             <div class="progress-label-right">(<span
                                     id="total_three_star_review"><?=$threeStar;?></span>)
                             </div>
-                            <div class="progress">
+                            <div class="progress bg-warning" style="width:60%">
                                 <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
                                     aria-valuemin="0" aria-valuemax="100" id="three_star_progress"></div>
                             </div>
@@ -953,7 +860,7 @@ echo $AVGRATE;
 
                             <div class="progress-label-right">(<span id="total_two_star_review"><?=$twoStar;?></span>)
                             </div>
-                            <div class="progress">
+                            <div class="progress bg-warning" style="width:40%">
                                 <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
                                     aria-valuemin="0" aria-valuemax="100" id="two_star_progress"></div>
                             </div>
@@ -963,7 +870,7 @@ echo $AVGRATE;
 
                             <div class="progress-label-right">(<span id="total_one_star_review"><?=$oneStar;?></span>)
                             </div>
-                            <div class="progress">
+                            <div class="progress bg-warning" style="width:20%">
                                 <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0"
                                     aria-valuemin="0" aria-valuemax="100" id="one_star_progress"></div>
                             </div>
@@ -978,7 +885,7 @@ echo $AVGRATE;
                             <button type="button" class="btn" disabled>Review</button>
                             <?php } else {?>
 
-                            <button type="button" name="add_review" id="add_review" class="btn btn-primary">
+                            <button type="button" name="add_review" id="add_review" class="btn btn-warning">
                                 Review</button>
                             <?php }?>
                         </div>
@@ -1055,7 +962,7 @@ echo $AVGRATE;
                                 placeholder="Type Review Here"></textarea>
                         </div>
                         <div class="form-group text-center mt-4">
-                            <button type="button" class="btn btn-primary" id="save_review" onClick="window.location.reload();"
+                            <button type="button" class="btn btn-warning" id="save_review" onClick="window.location.reload();"
                                 >Submit</button>
                         </div>
                     </div>
@@ -1077,9 +984,9 @@ echo $AVGRATE;
 
 
     <script>
-    var element = document.getElementsByClassName(' value');
+    var element = document.getElementsByClassName('value');
     console.log(element[0].innerHTML);
-    if (element[0].innerHTML == " Out of Stock") {
+    if (element[0].innerHTML == "Out of Stock") {
         document.getElementById("addtocart").style.backgroundColor = "#B2BEB5";
         document.getElementById("addtocart").removeAttribute('href');
         document.getElementById("availability").style.color = "#cc0000";
@@ -1092,8 +999,7 @@ echo $AVGRATE;
         $('#review_modal').modal('show');
     });
     $(document).on('mouseenter', '.submit_star', function() {
-        var
-            rating = $(this).data('rating');
+        var rating = $(this).data('rating');
         reset_background();
         for (var count = 1; count <= rating; count++) {
             $('#submit_star_' + count).addClass('text-warning');
@@ -1101,7 +1007,7 @@ echo $AVGRATE;
     });
 
     function reset_background() {
-        for (var count = 1; count <= 5; count++) {
+        for (var count = 1; count <= 5; count++) {  
             $('#submit_star_' +
                 count).addClass('star-light');
             $('#submit_star_' + count).removeClass('text-warning');

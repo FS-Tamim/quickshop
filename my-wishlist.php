@@ -66,7 +66,7 @@ header('location:my-wishlist.php');
     
 
     .btn {
-        background-color: #ffd300 !important;
+        background-color: #ffd300 ;
         color: #181818 !important;
         font-size: 14px !important;
         font-weight: bold !important;
@@ -151,7 +151,7 @@ while ($row=mysqli_fetch_array($ret)) {
                                             <?php if($row['availability']== "Out of Stock"){?>
                                             <div>
 
-                                                <a class="btn lnk" style="background-color:#B2BEB5;" id="addtocart">Add
+                                                <a class="btn" style="background-color:#B2BEB5;" id="addtocart">Add
                                                     to cart</a>
                                             </div>
                                             <?php } else{?>
@@ -160,7 +160,7 @@ while ($row=mysqli_fetch_array($ret)) {
 
                                                 <a id="addtocart"
                                                     href="my-wishlist.php?page=product&action=add&id=<?php echo $row['pid']; ?>"
-                                                    class="btn lnk" style="background-color:#db3d52;" id="addtocart">Add
+                                                    class="btn" style="background-color:#ffd300;" id="addtocart">Add
                                                     to cart</a>
                                             </div>
                                             <?php } ?>

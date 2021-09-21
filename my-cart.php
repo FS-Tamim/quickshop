@@ -109,7 +109,7 @@ header("location:example_hosted.php");
     }
 
     .productname:hover {
-        color: #ffffff;
+        color: orange;
     }
 
   

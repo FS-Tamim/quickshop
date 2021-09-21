@@ -118,6 +118,15 @@ header{
 .control-group{
     margin-bottom: 1.5% !important;
 }
+.forgot-password {
+    color: #FFD300;
+
+}
+
+.forgot-password:hover {
+    color: orange;
+    text-decoration: none;
+}
 
 
 </style>
@@ -146,8 +155,8 @@ header{
                 placeholder="Password">
         </div>
         <div class="form-group">
-            <a href="forgot-password.php"><label class="form-check-label" for="exampleCheck1">Forgot
-                    Password??</label></a>
+            <a href="../forgot-password.php" class="forgot-password pull-right">Forgot your
+                Password?</a>
         </div>
         <button type="submit" name="submit" id="submit" class="btn btn">Login</button>
     </form>

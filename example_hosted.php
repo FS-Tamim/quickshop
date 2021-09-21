@@ -29,15 +29,24 @@ else{
          
       
     }
+    $userId=$_SESSION['id'];
     if (isset($_POST['cashsubmit'])) {
         
+        foreach($_SESSION['value'] as $qty=>$val34){
+            echo "<script>console.log('Debug Objects:product1 " .$qty . "' );</script>";
+            echo "<script>console.log('Debug Objects:product2 " .$val34 . "' );</script>";
 
-		// mysqli_query($con,"update orders set paymentMethod='COD' where userId='".$_SESSION['id']."' and paymentMethod is null ");
-        mysqli_query($con,"update orders set name='$name',email='$email',phone='$phone', address='$address',amount='$transaction_amount',transaction_id='$order_id',currency='$currency',status='Processing',paymentMethod='COD' where userId='" .$_SESSION['id'] . "' and paymentMethod is null");
+            mysqli_query($con,"insert into orders(userId,name,email,phone,productId,billaddress,shipaddress,quantity,transaction_id,paymentMethod,currency,status,amount) values('$userId','$name','$email','$phone','$qty',' $address','$address2','$val34','$order_id','COD','$currency','Pending','$transaction_amount')");
+
+           
+          
+            
+             }
+		
+        unset($_SESSION['cart']);
 		
 		 header('location:order-history.php');
     }
-     
 	
 	
    
@@ -184,7 +193,7 @@ else{
                 <hr class="mb-4">
                 <br>
 
-                <form name="payment" method="post">
+                <form name="payment" method="post" action="example_hosted.php">
                     <input type="submit" class="btn  btn-lg btn-block" value="Cash on Delivery"
                         name="cashsubmit">
                 </form>

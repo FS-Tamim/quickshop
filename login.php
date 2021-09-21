@@ -112,6 +112,15 @@ else{
 .botton-line a:hover{
     color: yellow;
 }
+.forgot-password {
+    color: #FFD300;
+
+}
+
+.forgot-password:hover {
+    color: orange;
+    text-decoration: none;
+}
 
 
 </style>
@@ -139,7 +148,7 @@ else{
     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
   <div class="form-group">
-    <a href="forgot-password.php"><label class="form-check-label" for="exampleCheck1">Forgot Password??</label></a>
+    <a href="forgot-password.php"><label class="form-check-label forgot-password" for="exampleCheck1">Forgot Password??</label></a>
   </div>
   <button type="submit" name="submit" id="submit" class="btn btn-warning">Login</button>
 </form>

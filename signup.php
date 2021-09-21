@@ -292,7 +292,7 @@ $email=$_POST['email'];
   <?php if(isset($cpasswordError)) echo $cpasswordError; ?>
   <div  class="termandcondition">
    <input type="checkbox" name="term" value="true" >
-   <span><b>I am agree to term and condition of HatQuick Shop.com</b></span>
+   <span><b>I am agree to term and condition of Quick Shop.com</b></span>
   </div>
   <br>
  

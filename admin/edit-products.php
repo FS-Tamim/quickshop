@@ -274,7 +274,7 @@ while($rw=mysqli_fetch_array($query))
                                         <label class="control-label" for="basicinput">Product Image1</label>
                                         <div class="controls">
                                             <img src="productimages/<?php echo htmlentities($pid);?>/<?php echo htmlentities($row['productImage1']);?>"
-                                                width="200" height="100"> <a
+                                                width="200" height="100"> <a class="btn"
                                                 href="update-image1.php?id=<?php echo $row['id'];?>">Change Image</a>
                                         </div>
                                     </div>

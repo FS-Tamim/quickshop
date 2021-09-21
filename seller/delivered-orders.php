@@ -43,7 +43,17 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
      <style>
         .module{
             backdrop-filter: #303030 !important;
+		
         }
+        .module-head{
+            backdrop-filter: #303030 !important;
+            
+		
+        }
+		.wrapper{
+			
+            
+		}
          .table,.module-head,th,td{
             background-color:#303030;
             color: white;
@@ -68,6 +78,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
         .wrapper{
                 margin-top: 5%;
             }
+        
     </style>
 </head>
 
@@ -107,7 +118,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
                                             <th>#</th>
                                             <th> Name</th>
                                             <th>Email</th>
-                                            <th>Shipping Address</th>
+                                            <!-- <th>Shipping Address</th> -->
                                             <th>Product </th>
                                             <th>Qty </th>
                                             <th>Amount </th>
@@ -134,8 +145,6 @@ while($row=mysqli_fetch_array($query))
                                             <td><?php echo htmlentities($row['useremail']);?>/<?php echo htmlentities($row['usercontact']);?>
                                             </td>
 
-                                            <td><?php echo htmlentities($row['shippingaddress']);?>
-                                            </td>
                                             <td><?php echo htmlentities($row['productname']);?></td>
                                             <td><?php echo htmlentities($row['quantity']);?></td>
                                             <td><?php echo htmlentities($row['quantity']*$row['productprice']+$row['shippingcharge']);?>

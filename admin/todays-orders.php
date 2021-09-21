@@ -38,15 +38,19 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 <style>
         .module{
             backdrop-filter: #303030 !important;
+			width: 105% !important;
         }
-		.module-head{
-			width: 100% !important;
-		}
+		/* .module-head{
+			width: 105% !important;
+		} */
          .table,.module-head,th,td{
             background-color:#303030;
             color: white;
 			
         }
+		.table{
+			width: 90% !important;
+		}
         th:hover{
             background-color: #383838;
         }
@@ -65,6 +69,9 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
         .content{
             background-color: #303030;
         }
+		.shipping address{
+			width: 80% !important;
+		}
     </style>
 </head>
 <body>
@@ -94,7 +101,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 
 							
 			<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered  display " >
-									<thead>
+			<thead>
 										<tr>
 											<th>#</th>
 											<th> Name</th>
@@ -109,7 +116,6 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 										
 										</tr>
 									</thead>
-								
 <tbody>
 <?php 
  $f1="00:00:00";
